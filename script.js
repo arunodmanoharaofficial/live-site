@@ -7,14 +7,77 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Footer already uses &copy; in HTML
 
-  // Set typing widths based on text length
+  // Measure and set typing width in pixels for accuracy across devices
   const setTypingWidth = (el) => {
     if (!el) return;
-    const len = (el.textContent || '').trim().length;
-    if (len > 0) el.style.setProperty('--typing-w', `${len}ch`);
+    const text = (el.textContent || '').trim();
+    if (!text) return;
+
+    const prev = {
+      width: el.style.width,
+      whiteSpace: el.style.whiteSpace,
+      position: el.style.position,
+      visibility: el.style.visibility
+    };
+
+    // Temporarily let it size naturally to measure full single-line width
+    el.style.visibility = 'hidden';
+    el.style.position = 'absolute';
+    el.style.whiteSpace = 'nowrap';
+    el.style.width = 'auto';
+
+    const px = Math.ceil(el.scrollWidth);
+    el.style.setProperty('--typing-w', `${px}px`);
+
+    // Restore previous inline styles
+    el.style.width = prev.width;
+    el.style.whiteSpace = prev.whiteSpace;
+    el.style.position = prev.position;
+    el.style.visibility = prev.visibility;
   };
-  setTypingWidth(document.querySelector('.hero .hashtag'));
-  setTypingWidth(document.querySelector('.hero .subtitle'));
+
+  const hashtagEl = document.querySelector('.hero .hashtag');
+  const subtitleEl = document.querySelector('.hero .subtitle');
+  setTypingWidth(hashtagEl);
+  setTypingWidth(subtitleEl);
+
+  // Recalculate width after fonts load and on resize (mobile accuracy)
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(() => {
+      setTypingWidth(hashtagEl);
+      setTypingWidth(subtitleEl);
+    });
+  } else {
+    // Fallback after window load
+    window.addEventListener('load', () => {
+      setTypingWidth(hashtagEl);
+      setTypingWidth(subtitleEl);
+    }, { once: true });
+  }
+
+  let resizeRaf = null;
+  window.addEventListener('resize', () => {
+    if (!resizeRaf) resizeRaf = requestAnimationFrame(() => {
+      resizeRaf = null;
+      setTypingWidth(hashtagEl);
+      setTypingWidth(subtitleEl);
+    });
+  });
+
+  // After typing finishes, allow wrapping so long bios are fully visible on mobile
+  const allowWrapAfterTyping = (el) => {
+    if (!el) return;
+    el.addEventListener('animationend', (e) => {
+      if (e.animationName === 'typing') {
+        el.style.whiteSpace = 'normal';
+        el.style.width = 'auto';
+        // Remove caret; keep text visible
+        el.style.borderRight = '0';
+      }
+    });
+  };
+  allowWrapAfterTyping(hashtagEl);
+  allowWrapAfterTyping(subtitleEl);
 
   // Decode (scramble -> name) effect on page load
   const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
