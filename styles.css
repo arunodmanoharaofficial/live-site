@@ -173,7 +173,8 @@ body {
   font-weight: 700;
   letter-spacing: 0.3px;
   margin-top: -6px;
-  animation: typing 2.8s steps(40, end) 0.6s forwards, blink .8s step-end infinite .6s;
+  /* Slowed typing speed */
+  animation: typing 5.6s steps(40, end) 0.6s forwards, blink .8s step-end infinite .6s;
 }
 .hero .subtitle {
   display: inline-block;
@@ -181,7 +182,8 @@ body {
   overflow: hidden;
   border-right: 2px solid rgba(230,236,255,0.9);
   width: 0;
-  animation: typing 3.2s steps(50, end) 0.4s forwards, blink .8s step-end infinite .4s;
+  /* Slowed typing speed */
+  animation: typing 6.4s steps(50, end) 0.4s forwards, blink .8s step-end infinite .4s;
 }
 .cta { display: flex; gap: 12px; margin-top: 6px; }
 
