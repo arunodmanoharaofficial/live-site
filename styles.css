@@ -362,8 +362,6 @@ body {
   .nav { padding: 12px 0; }
   .brand-badge { width: 32px; height: 32px; }
   .title { font-size: 32px; }
-  .hero .hashtag { white-space: normal; border-right: 0; width: auto; animation: none; }
-  .hero .subtitle { white-space: normal; border-right: 0; width: auto; animation: none; }
 }
 
 /* Respect reduced motion */
