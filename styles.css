@@ -17,7 +17,7 @@
   --card: #0a1022;
   --border: rgba(0,229,255,0.15);
   --shadow: rgba(2, 8, 23, 0.65);
-  --grid: rgba(0, 229, 255, 0.04);
+  --grid: rgba(0, 229, 255, 0.06);
 }
 
 * { box-sizing: border-box; }
@@ -26,10 +26,6 @@ body {
   margin: 0;
   font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
   color: var(--text);
-  line-height: 1.6;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-rendering: optimizeLegibility;
   background-color: var(--bg);
   background-image:
     linear-gradient(var(--grid) 1px, transparent 1px),
@@ -142,11 +138,8 @@ body {
   text-decoration: none;
   margin-left: 16px;
   font-weight: 600;
-  padding: 6px 10px;
-  border-radius: 10px;
-  transition: background .2s ease, color .2s ease;
 }
-.menu a:hover { color: var(--text); background: rgba(255,255,255,0.06); }
+.menu a:hover { color: var(--text); text-shadow: 0 0 8px rgba(0,229,255,0.6); }
 
 .hero {
   display: grid;
@@ -156,7 +149,7 @@ body {
   position: relative;
 }
 
-.title { font: 800 48px/1.08 'ADLaM Display', Inter, sans-serif; margin: 12px 0 4px; letter-spacing: 0.2px; }
+.title { font: 800 48px/1.05 'ADLaM Display', Inter, sans-serif; margin: 12px 0 0; }
 .title .hi { display: block; font: 600 18px/1.6 Inter, sans-serif; color: var(--muted); }
 .gradient-text {
   background: linear-gradient(90deg, var(--accent-1), var(--accent-2), var(--accent-3));
@@ -169,7 +162,7 @@ body {
 /* Name base styling (decode effect handled in JS) */
 .name { position: relative; display: inline-block; }
 
-.subtitle { color: var(--muted); max-width: 60ch; font-size: 18px; line-height: 1.55; }
+.subtitle { color: var(--muted); max-width: 60ch; }
 .hero .hashtag {
   display: inline-block;
   white-space: nowrap;
@@ -196,14 +189,13 @@ body {
 
 .btn {
   display: inline-flex; align-items: center; justify-content: center;
-  padding: 13px 20px; border-radius: 14px; text-decoration: none; font-weight: 700; gap: 8px;
+  padding: 12px 18px; border-radius: 12px; text-decoration: none; font-weight: 700;
   border: 1px solid var(--border); color: var(--text);
   transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
 }
 .btn.primary { background: linear-gradient(135deg, var(--accent-1), var(--accent-2)); box-shadow: 0 6px 18px rgba(0,229,255,0.18); }
 .btn.primary:hover { box-shadow: 0 12px 36px rgba(0,229,255,0.28), 0 8px 18px var(--shadow); transform: translateY(-2px); }
 .btn.ghost:hover { background: rgba(255,255,255,0.04); transform: translateY(-2px); }
-.btn:focus-visible { outline: 0; box-shadow: 0 0 0 3px rgba(0,229,255,0.35), 0 8px 18px var(--shadow); }
 
 .hero-orbs { position: absolute; inset: 0; pointer-events: none; }
 .orb {
