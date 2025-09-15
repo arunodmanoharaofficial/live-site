@@ -11,7 +11,7 @@
     const y = document.getElementById('year');
     if (y) y.textContent = new Date().getFullYear();
 
-    // --- Typing width measurement (off-DOM clone) ---
+    // Typing width measurement (off-DOM clone)
     const measureAndSetTypingWidth = (el) => {
       if (!el) return;
       const text = (el.textContent || '').trim();
@@ -47,7 +47,7 @@
       subtitleEl && ro.observe(subtitleEl);
     }
 
-    // After typing finishes, allow wrapping
+    // After typing, allow wrapping
     const allowWrapAfterTyping = (el) => {
       if (!el) return;
       el.addEventListener('animationend', (e) => {
@@ -61,7 +61,7 @@
     allowWrapAfterTyping(hashtagEl);
     allowWrapAfterTyping(subtitleEl);
 
-    // --- Decode (scramble -> name) with RAF ---
+    // Decode (scramble -> name) with RAF
     const nameEl = document.querySelector('.title .name');
     if (nameEl) {
       const final = nameEl.dataset.text || nameEl.textContent || '';
@@ -86,7 +86,7 @@
       document.addEventListener('visibilitychange', () => { if (!document.hidden) runDecode(); });
     }
 
-    // Prefer logo image if present
+    // Prefer logo when image loads
     const brand = document.querySelector('.brand');
     const logo = document.querySelector('.brand-logo');
     if (brand && logo) {
@@ -95,7 +95,7 @@
       logo.addEventListener('load', markLoaded, { once: true });
     }
 
-    // --- IntersectionObserver for reveal animations ---
+    // Reveal-on-scroll
     const revealEls = Array.from(document.querySelectorAll('.reveal'));
     if (prefersReduced()) {
       revealEls.forEach(el => el.classList.add('visible'));
@@ -108,7 +108,7 @@
       revealEls.forEach(el => el.classList.add('visible'));
     }
 
-    // --- Nav aria-current updater (on scroll) ---
+    // Nav aria-current updater
     const sections = [...document.querySelectorAll('main section[id]')];
     const links = [...document.querySelectorAll('.menu a[href^="#"]')];
     const byId = id => links.find(a => a.getAttribute('href') === `#${id}`);
@@ -123,7 +123,7 @@
     setActive();
     window.addEventListener('scroll', setActive, { passive: true });
 
-    // --- Hover tilt (desktop, motion-respecting) ---
+    // Hover tilt (desktop + motion-respecting)
     const enableTilt = () => hasHoverPointer() && !prefersReduced();
     const tiltEls = Array.from(document.querySelectorAll('.tilt'));
     const attachTilt = () => {
@@ -166,18 +166,18 @@
     const bgMode = document.body.dataset.bg || 'mesh'; // set to "particles" in HTML
     const reduced = prefersReduced();
 
-    // Hi-DPI canvas fitter: returns context scaled to CSS pixels
+    // Hi-DPI canvas fitter (returns context scaled to CSS px)
     const fitCanvas = (canvas) => {
       const dpr = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
       const rect = canvas.getBoundingClientRect();
       canvas.width = Math.round(rect.width * dpr);
       canvas.height = Math.round(rect.height * dpr);
       const ctx = canvas.getContext('2d');
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0); // draw in CSS px
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       return ctx;
     };
 
-    /* ---------- WAVES THEME (canvas) ---------- */
+    // WAVES THEME
     if (bgMode === 'waves' && !reduced) {
       const canvas = document.querySelector('.bg-waves');
       if (canvas) {
@@ -217,7 +217,7 @@
       }
     }
 
-    /* ---------- PARTICLES THEME (canvas) ---------- */
+    // PARTICLES THEME
     if (bgMode === 'particles' && !reduced) {
       const canvas = document.querySelector('.bg-particles');
       if (canvas) {
@@ -238,8 +238,10 @@
           rect = canvas.getBoundingClientRect();
           W = rect.width; H = rect.height;
           ctx.clearRect(0,0,W,H);
+
           ctx.fillStyle = 'rgba(255,255,255,0.55)';
           for (const p of pts) { ctx.beginPath(); ctx.arc(p.x, p.y, 1.2, 0, Math.PI*2); ctx.fill(); }
+
           ctx.lineWidth = 1;
           for (let i=0;i<pts.length;i++){
             for (let j=i+1;j<pts.length;j++){
@@ -252,6 +254,7 @@
               }
             }
           }
+
           for (const p of pts){
             p.x+=p.vx; p.y+=p.vy;
             if (p.x<0||p.x>W) p.vx*=-1;
@@ -270,7 +273,7 @@
       }
     }
 
-    /* ---------- Parallax for active background layer ---------- */
+    // Parallax for active background
     (() => {
       if (reduced) return;
       const activeLayer =
@@ -291,5 +294,9 @@
       document.addEventListener('visibilitychange', () => { if (document.hidden) activeLayer.style.transform = ''; });
     })();
 
+    // If we landed on a bad hash, normalize to the top once
+    if (location.hash && !document.querySelector(location.hash)) {
+      history.replaceState(null, '', location.pathname);
+    }
   });
 })();
