@@ -1,7 +1,7 @@
 /*
   Personal Page Styles
   - Responsive layout
-  - Aurora background + subtle grain
+  - Animated background system (mesh / waves / particles) — using particles globally
   - Scroll reveal + hover tilt
   - Prefers-reduced-motion respected
 */
@@ -46,22 +46,35 @@ body {
   box-shadow: 0 0 0 2px rgba(0,229,255,0.35);
 }
 
-.bg-aurora {
-  position: fixed;
-  inset: -20% -10% -10% -10%;
-  pointer-events: none;
-  background:
-    radial-gradient(600px 400px at 20% 10%, rgba(0,229,255,0.18), transparent 60%),
-    radial-gradient(800px 500px at 80% 40%, rgba(0,255,157,0.14), transparent 60%),
-    radial-gradient(500px 380px at 60% -10%, rgba(124,58,237,0.12), transparent 60%);
+/* ===== Animated background system ===== */
+.bg-layer { position: fixed; inset: -10% -10% -10% -10%; z-index: -3; pointer-events: none; }
+.bg-layer { opacity: 0; transition: opacity .6s ease; }
+body[data-bg="mesh"] .bg-mesh,
+body[data-bg="waves"] .bg-waves,
+body[data-bg="particles"] .bg-particles { opacity: 1; }
+
+/* Gradient Mesh (CSS-only, very light) */
+.bg-mesh {
   filter: blur(40px) saturate(130%);
-  opacity: 0.9;
-  animation: drift 22s linear infinite;
-  z-index: -3;
-  will-change: transform;
-  transform: translate3d(var(--tx, 0px), var(--ty, 0px), 0) scale(1.02);
+  background:
+    radial-gradient(600px 400px at 20% 10%, rgba(0,229,255,.20), transparent 60%),
+    radial-gradient(800px 520px at 80% 40%, rgba(0,255,157,.18), transparent 60%),
+    radial-gradient(620px 480px at 50% 90%, rgba(124,58,237,.20), transparent 60%);
+  animation: mesh-pan 18s ease-in-out infinite alternate;
+}
+@keyframes mesh-pan {
+  0%   { background-position: 0% 0%, 0% 0%, 0% 0%; }
+  50%  { background-position: 10% 5%,  -6% 4%,   4% 8%; }
+  100% { background-position:  -6% 4%,  8% 6%,  -4% -6%; }
 }
 
+/* Waves (canvas filled via JS) */
+.bg-waves { z-index: -4; }
+
+/* Particles/Constellations (canvas via JS) */
+.bg-particles { z-index: -5; }
+
+/* Grain overlay on top of backgrounds */
 .grain {
   position: fixed;
   inset: 0;
@@ -72,43 +85,16 @@ body {
   pointer-events: none;
 }
 
-/* Starfield dots overlay */
-.bg-stars {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  background-image:
-    radial-gradient(2px 2px at 20% 30%, rgba(0,229,255,0.18), transparent 60%),
-    radial-gradient(2px 2px at 70% 60%, rgba(0,255,157,0.16), transparent 60%),
-    radial-gradient(2px 2px at 40% 80%, rgba(124,58,237,0.18), transparent 60%),
-    radial-gradient(2px 2px at 85% 20%, rgba(0,229,255,0.14), transparent 60%);
-  animation: star-drift 40s linear infinite;
-  z-index: -2;
+/* Remove legacy layers if present */
+.bg-aurora, .bg-stars, .bg-scan { display: none !important; }
+
+/* Reduced motion → keep static mesh & disable canvases */
+@media (prefers-reduced-motion: reduce) {
+  .bg-mesh { animation: none !important; }
+  .bg-waves, .bg-particles { display: none !important; }
 }
 
-/* Diagonal neon scan sweep */
-.bg-scan {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  background: linear-gradient(-75deg, transparent 30%, rgba(0,229,255,0.12) 45%, rgba(0,255,157,0.10) 55%, transparent 70%);
-  background-size: 200% 200%;
-  mix-blend-mode: screen;
-  animation: bg-sweep 12s linear infinite;
-  opacity: 0.35;
-  z-index: -1;
-}
-
-@keyframes drift {
-  0% { transform: translateY(-4%) rotate(0deg) scale(1.05); }
-  50% { transform: translateY(4%) rotate(180deg) scale(1.02); }
-  100% { transform: translateY(-4%) rotate(360deg) scale(1.05); }
-}
-
-.container {
-  width: min(1100px, 92%);
-  margin: 0 auto;
-}
+.container { width: min(1100px, 92%); margin: 0 auto; }
 
 .site-header {
   position: sticky;
@@ -145,12 +131,7 @@ body {
 .brand.logo-loaded .brand-logo { display: block; }
 .brand.logo-loaded .brand-badge { display: none; }
 
-.menu a {
-  color: var(--muted);
-  text-decoration: none;
-  margin-left: 16px;
-  font-weight: 600;
-}
+.menu a { color: var(--muted); text-decoration: none; margin-left: 16px; font-weight: 600; }
 .menu a:hover { color: var(--text); text-shadow: 0 0 8px rgba(0,229,255,0.6); }
 /* Accessible focus styles */
 :focus:not(:focus-visible) { outline: none; }
@@ -181,7 +162,6 @@ body {
   background-size: 200% 100%;
   animation: gradient-pan 8s ease-in-out infinite alternate, glow-pulse 5s ease-in-out infinite;
 }
-
 /* Name base styling (decode effect handled in JS) */
 .name { position: relative; display: inline-block; }
 
@@ -217,7 +197,6 @@ body {
   border: 1px solid var(--border); color: var(--text);
   transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
 }
-
 .btn.primary { background: linear-gradient(135deg, var(--accent-1), var(--accent-2)); box-shadow: 0 6px 18px rgba(0,229,255,0.18); }
 @media (hover: hover) and (pointer: fine) {
   .btn.primary:hover { box-shadow: 0 12px 36px rgba(0,229,255,0.28), 0 8px 18px var(--shadow); transform: translateY(-2px); }
@@ -240,32 +219,16 @@ body {
 }
 
 /* Additional theme animations */
-@keyframes star-drift {
-  0% { transform: translateY(0) translateX(0); }
-  50% { transform: translateY(-10px) translateX(6px); }
-  100% { transform: translateY(0) translateX(0); }
-}
-
 @keyframes gradient-pan {
   0% { background-position: 0% 50%; }
   100% { background-position: 100% 50%; }
 }
-
 @keyframes glow-pulse {
   0%, 100% { text-shadow: 0 0 0 rgba(0,229,255,0); }
   50% { text-shadow: 0 0 18px rgba(0,229,255,0.45); }
 }
 
-@keyframes bg-sweep {
-  0% { background-position: 200% 0; }
-  100% { background-position: -200% 0; }
-}
-
-@keyframes typing {
-  from { width: 0; }
-  to { width: var(--typing-w, 48ch); }
-}
-
+@keyframes typing { from { width: 0; } to { width: var(--typing-w, 48ch); } }
 @keyframes blink { 50% { border-color: transparent; } }
 
 .about {
@@ -329,8 +292,7 @@ body {
 
 /* Reveal on scroll */
 .reveal { opacity: 0; transform: translateY(18px); transition: opacity .7s ease, transform .7s cubic-bezier(.2,.7,.2,1); }
-.reveal.visible,
-.reveal.in { opacity: 1; transform: none; }
+.reveal.visible, .reveal.in { opacity: 1; transform: none; }
 
 /* Tilt hover (initial state) */
 .tilt { transform-style: preserve-3d; perspective: 600px; }
@@ -359,7 +321,7 @@ body {
   .muted, .card-text span { color: #bcd0ff; }
 }
 
-/* Respect reduced motion — single consolidated block */
+/* Reduced motion — consolidate */
 @media (prefers-reduced-motion: reduce) {
   * { animation: none !important; transition: none !important; }
   .reveal { opacity: 1 !important; transform: none !important; }
