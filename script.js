@@ -31,20 +31,18 @@
     };
 
     const hashtagEl = document.querySelector('.hero .hashtag');
-    const subtitleEl = document.querySelector('.hero .subtitle');
-    const setAllTyping = () => { measureAndSetTypingWidth(hashtagEl); measureAndSetTypingWidth(subtitleEl); };
-    setAllTyping();
-    document.fonts?.ready?.then(setAllTyping);
-    window.addEventListener('load', setAllTyping, { once: true });
+    const setHashtagTyping = () => { measureAndSetTypingWidth(hashtagEl); };
+    setHashtagTyping();
+    document.fonts?.ready?.then(setHashtagTyping);
+    window.addEventListener('load', setHashtagTyping, { once: true });
 
     let resizeRaf = null;
     window.addEventListener('resize', () => {
-      if (!resizeRaf) resizeRaf = requestAnimationFrame(() => { resizeRaf = null; setAllTyping(); });
+      if (!resizeRaf) resizeRaf = requestAnimationFrame(() => { resizeRaf = null; setHashtagTyping(); });
     });
-    if ('ResizeObserver' in window) {
-      const ro = new ResizeObserver(setAllTyping);
-      hashtagEl && ro.observe(hashtagEl);
-      subtitleEl && ro.observe(subtitleEl);
+    if ('ResizeObserver' in window && hashtagEl) {
+      const ro = new ResizeObserver(setHashtagTyping);
+      ro.observe(hashtagEl);
     }
 
     // After typing, allow wrapping
@@ -59,7 +57,6 @@
       });
     };
     allowWrapAfterTyping(hashtagEl);
-    allowWrapAfterTyping(subtitleEl);
 
     // Decode (scramble -> name) with RAF
     const nameEl = document.querySelector('.title .name');
@@ -300,3 +297,4 @@
     }
   });
 })();
+
