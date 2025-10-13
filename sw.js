@@ -5,12 +5,23 @@ const ASSETS = [
   "./styles.css",
   "./script.js",
   "./profile.jpg",
-  "./logo.png",
-  "./resume.pdf"
+  "./logo.png"
 ];
 
 self.addEventListener("install", (e) => {
-  e.waitUntil(caches.open(CACHE).then((cache) => cache.addAll(ASSETS)));
+  e.waitUntil(
+    caches.open(CACHE).then(async (cache) => {
+      await Promise.all(
+        ASSETS.map(async (asset) => {
+          try {
+            await cache.add(asset);
+          } catch (err) {
+            console.warn("Service worker: failed to cache", asset, err);
+          }
+        })
+      );
+    })
+  );
 });
 
 self.addEventListener("fetch", (e) => {
