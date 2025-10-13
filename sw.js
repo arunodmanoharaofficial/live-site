@@ -5,12 +5,30 @@ const ASSETS = [
   "./styles.css",
   "./script.js",
   "./profile.jpg",
-  "./logo.png",
+  "./logo.png"
+];
+
+// Assets that are nice-to-have but should not break install if missing.
+const OPTIONAL_ASSETS = [
   "./resume.pdf"
 ];
 
 self.addEventListener("install", (e) => {
-  e.waitUntil(caches.open(CACHE).then((cache) => cache.addAll(ASSETS)));
+  e.waitUntil(
+    caches.open(CACHE).then(async (cache) => {
+      await cache.addAll(ASSETS);
+      if (OPTIONAL_ASSETS.length) {
+        const results = await Promise.allSettled(
+          OPTIONAL_ASSETS.map((asset) => cache.add(asset))
+        );
+        for (const result of results) {
+          if (result.status === "rejected") {
+            console.warn("Optional asset failed to cache:", result.reason);
+          }
+        }
+      }
+    })
+  );
 });
 
 self.addEventListener("fetch", (e) => {
