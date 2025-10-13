@@ -120,6 +120,37 @@
     setActive();
     window.addEventListener('scroll', setActive, { passive: true });
 
+    // Mobile navigation toggle
+    const menuToggle = document.querySelector('.menu-toggle');
+    const menu = document.getElementById('primary-menu');
+    if (menu && menuToggle) {
+      const openMenu = () => {
+        menu.classList.add('is-open');
+        menuToggle.classList.add('is-active');
+        menuToggle.setAttribute('aria-expanded', 'true');
+      };
+      const closeMenu = () => {
+        menu.classList.remove('is-open');
+        menuToggle.classList.remove('is-active');
+        menuToggle.setAttribute('aria-expanded', 'false');
+      };
+      const toggleMenu = () => {
+        if (menu.classList.contains('is-open')) closeMenu();
+        else openMenu();
+      };
+      menuToggle.addEventListener('click', toggleMenu);
+      menu.addEventListener('click', (ev) => {
+        const link = ev.target?.closest?.('a');
+        if (link) closeMenu();
+      });
+      window.addEventListener('resize', () => {
+        if (window.innerWidth > 720 && menu.classList.contains('is-open')) closeMenu();
+      });
+      document.addEventListener('keydown', (ev) => {
+        if (ev.key === 'Escape' && menu.classList.contains('is-open')) closeMenu();
+      });
+    }
+
     // Hover tilt (desktop + motion-respecting)
     const enableTilt = () => hasHoverPointer() && !prefersReduced();
     const tiltEls = Array.from(document.querySelectorAll('.tilt'));
