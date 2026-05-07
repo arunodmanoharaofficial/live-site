@@ -486,5 +486,119 @@
         });
       }, { once: true });
     }
+
+    // ── ANIMATION ENHANCEMENTS ────────────────────────────────────
+
+    // 1. Scroll progress bar
+    const progressBar = document.getElementById('scroll-progress');
+    if (progressBar) {
+      const updateProgress = () => {
+        const scrollTop  = window.scrollY || document.documentElement.scrollTop;
+        const docHeight  = document.documentElement.scrollHeight - window.innerHeight;
+        const pct        = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+        progressBar.style.width = pct.toFixed(2) + '%';
+      };
+      window.addEventListener('scroll', updateProgress, { passive: true });
+      updateProgress();
+    }
+
+    // 2. Cursor glow (RAF-throttled, pointer-tracked)
+    const cursorGlow = document.getElementById('cursor-glow');
+    if (cursorGlow && !prefersReduced()) {
+      let glowRaf = null, mx = -999, my = -999;
+      const moveCursor = (e) => { mx = e.clientX; my = e.clientY; };
+      const renderCursor = () => {
+        cursorGlow.style.transform = `translate(calc(-50% + ${mx}px), calc(-50% + ${my}px))`;
+        glowRaf = requestAnimationFrame(renderCursor);
+      };
+      window.addEventListener('pointermove', moveCursor, { passive: true });
+      glowRaf = requestAnimationFrame(renderCursor);
+      document.addEventListener('visibilitychange', () => {
+        if (document.hidden && glowRaf) { cancelAnimationFrame(glowRaf); glowRaf = null; }
+        else if (!document.hidden && !glowRaf) glowRaf = requestAnimationFrame(renderCursor);
+      });
+    }
+
+    // 3. Staggered card entrance
+    const cardEls = Array.from(document.querySelectorAll('.card'));
+    if (cardEls.length && 'IntersectionObserver' in window) {
+      const cardIO = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          const card  = entry.target;
+          const index = cardEls.indexOf(card);
+          const delay = prefersReduced() ? 0 : index * 80;
+          setTimeout(() => card.classList.add('card-visible'), delay);
+          cardIO.unobserve(card);
+        });
+      }, { threshold: 0.08, rootMargin: '0px 0px -8% 0px' });
+      if (prefersReduced()) {
+        cardEls.forEach(c => c.classList.add('card-visible'));
+      } else {
+        cardEls.forEach(c => cardIO.observe(c));
+      }
+    }
+
+    // 4. Staggered stack-item entrance
+    const stackItems = Array.from(document.querySelectorAll('.stack-item'));
+    if (stackItems.length && 'IntersectionObserver' in window) {
+      const stackIO = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          const item  = entry.target;
+          const index = stackItems.indexOf(item);
+          const delay = prefersReduced() ? 0 : index * 100;
+          setTimeout(() => item.classList.add('stack-visible'), delay);
+          stackIO.unobserve(item);
+        });
+      }, { threshold: 0.2, rootMargin: '0px 0px -10% 0px' });
+      if (prefersReduced()) {
+        stackItems.forEach(s => s.classList.add('stack-visible'));
+      } else {
+        stackItems.forEach(s => stackIO.observe(s));
+      }
+    }
+
+    // 5. Section heading underline draw
+    const headings = Array.from(document.querySelectorAll('h2.section-heading'));
+    if (headings.length && 'IntersectionObserver' in window) {
+      const headIO = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('heading-drawn');
+            headIO.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.5 });
+      if (prefersReduced()) {
+        headings.forEach(h => h.classList.add('heading-drawn'));
+      } else {
+        headings.forEach(h => headIO.observe(h));
+      }
+    }
+
+    // 6. Magnetic button effect (gentle pull toward cursor)
+    if (!prefersReduced() && hasHoverPointer()) {
+      const magBtns = Array.from(document.querySelectorAll('.btn.primary, .btn.ghost'));
+      magBtns.forEach(btn => {
+        let magRaf = null;
+        btn.addEventListener('pointermove', (e) => {
+          const r  = btn.getBoundingClientRect();
+          const cx = r.left + r.width  / 2;
+          const cy = r.top  + r.height / 2;
+          const dx = clamp((e.clientX - cx) / (r.width  / 2), -1, 1) * 7;
+          const dy = clamp((e.clientY - cy) / (r.height / 2), -1, 1) * 5;
+          if (magRaf) cancelAnimationFrame(magRaf);
+          magRaf = requestAnimationFrame(() => {
+            btn.style.transform = `translate(${dx}px, ${dy}px)`;
+          });
+        });
+        btn.addEventListener('pointerleave', () => {
+          if (magRaf) cancelAnimationFrame(magRaf);
+          btn.style.transform = '';
+        });
+      });
+    }
+
   });
 })();

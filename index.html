@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
@@ -126,6 +126,10 @@
 
   <!-- Applied globally: aurora gradient theme -->
   <body data-bg="aurora">
+    <!-- Scroll progress indicator -->
+    <div id="scroll-progress" aria-hidden="true"></div>
+    <!-- Cursor spotlight glow -->
+    <div id="cursor-glow" aria-hidden="true"></div>
     <!-- Skip to content (a11y) -->
     <a class="skip-link" href="#main">Skip to content</a>
 
@@ -242,7 +246,7 @@
           <img src="profile.jpg" alt="Arunod Manohara portrait" width="320" height="320" loading="lazy" decoding="async" itemprop="image" />
         </div>
         <div class="about-text">
-          <h2>About Me</h2>
+          <h2 class="section-heading">About Me</h2>
           <p itemprop="description">
             Hi, I&rsquo;m <strong>Arunod Manohara</strong> &mdash; a passionate <strong>Web Developer</strong> and <strong>Cybersecurity Enthusiast</strong> currently studying at <strong>SLIIT University</strong>, Sri Lanka.
           </p>
@@ -261,7 +265,7 @@
 
       <section id="stack" class="tech-stack container reveal">
         <div class="stack-head">
-          <h2>Tech Stack</h2>
+          <h2 class="section-heading">Tech Stack</h2>
           <p class="muted">Compact snapshot of the tools I use most.</p>
         </div>
         <ul class="stack-strip">
@@ -383,7 +387,7 @@
       </section>
 
       <section id="playlist" class="container reveal">
-        <h2>My Spotify Playlist</h2>
+        <h2 class="section-heading">My Spotify Playlist</h2>
         <div class="embed" data-embed="spotify">
           <div class="playlist-embed">
             <iframe
@@ -399,84 +403,52 @@
           <p class="playlist-note">Having trouble loading the embedded player? Spotify&rsquo;s embed can fail on certain locales, so tap the button above to open it directly.</p>
         </div>
       </section>
-
       <section id="social" class="social container reveal">
-        <h2>Find Me Online</h2>
+        <h2 class="section-heading">Find Me Online</h2>
         <div class="cards">
-          <a class="card tilt" data-tilt="off" href="https://github.com/arunodmanoharaofficial" target="_blank" rel="noreferrer noopener me" aria-label="GitHub" itemprop="sameAs">
+          <a class="card tilt" href="https://github.com/arunodmanoharaofficial" target="_blank" rel="noreferrer noopener me" aria-label="GitHub" itemprop="sameAs">
             <span class="icon">
-              <!-- GitHub -->
               <svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><path fill="currentColor" d="M12 2C6.48 2 2 6.58 2 12.26c0 4.52 2.87 8.35 6.84 9.71.5.1.68-.22.68-.49 0-.24-.01-.87-.01-1.71-2.78.62-3.37-1.2-3.37-1.2-.45-1.18-1.11-1.49-1.11-1.49-.91-.64.07-.63.07-.63 1 .07 1.53 1.06 1.53 1.06 .9 1.58 2.36 1.12 2.94.85.09-.67.35-1.12.64-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.31.1-2.73 0 0 .84-.27 2.75 1.05a9.2 9.2 0 0 1 5 0c1.9-1.32 2.74-1.05 2.74-1.05 .55 1.42.2 2.47.11 2.73 .64.72 1.03 1.63 1.03 2.75 0 3.94-2.34 4.81-4.57 5.07 .36.32.69.95.69 1.92 0 1.38-.01 2.5-.01 2.84 0 .27.18.59.69.49A10.03 10.03 0 0 0 22 12.26C22 6.58 17.52 2 12 2Z"/></svg>
             </span>
-            <div class="card-text">
-              <strong>GitHub</strong>
-              <span>/arunodmanoharaofficial</span>
-            </div>
+            <div class="card-text"><strong>GitHub</strong><span>/arunodmanoharaofficial</span></div>
           </a>
-
-          <a class="card tilt" data-tilt="off" href="https://www.linkedin.com/in/arunod-manohara-7613b6230/" target="_blank" rel="noreferrer noopener me" aria-label="LinkedIn" itemprop="sameAs">
+          <a class="card tilt" href="https://www.linkedin.com/in/arunod-manohara-7613b6230/" target="_blank" rel="noreferrer noopener me" aria-label="LinkedIn" itemprop="sameAs">
             <span class="icon linkedin">
-              <!-- LinkedIn -->
               <svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><path fill="currentColor" d="M20.45 2H3.55A1.56 1.56 0 0 0 2 3.6v16.8A1.56 1.56 0 0 0 3.55 22h16.9A1.56 1.56 0 0 0 22 20.4V3.6A1.56 1.56 0 0 0 20.45 2Zm-11 17H6.68V9.87h2.77Zm-1.39-9.54a1.61 1.61 0 1 1 1.61-1.61 1.61 1.61 0 0 1-1.61 1.61ZM19 19h-2.77v-4.47c0-1.07-.38-1.8-1.34-1.8a1.45 1.45 0 0 0-1.36 1 1.82 1.82 0 0 0-.09.65V19h-2.76s.04-7.27 0-8.13H13v1.15a2.74 2.74 0 0 1 2.49-1.37c1.82 0 3.18 1.19 3.18 3.74Z"/></svg>
             </span>
-            <div class="card-text">
-              <strong>LinkedIn</strong>
-              <span>@arunodmanohara</span>
-            </div>
+            <div class="card-text"><strong>LinkedIn</strong><span>@arunodmanohara</span></div>
           </a>
-
-          <a class="card tilt" data-tilt="off" href="https://twitter.com/arunodmanohara" target="_blank" rel="noreferrer noopener me" aria-label="Twitter" itemprop="sameAs">
+          <a class="card tilt" href="https://twitter.com/arunodmanohara" target="_blank" rel="noreferrer noopener me" aria-label="Twitter" itemprop="sameAs">
             <span class="icon twitter">
-              <!-- Twitter -->
               <svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><path fill="currentColor" d="M22.46 6.04c-.77.34-1.6.57-2.46.68a4.28 4.28 0 0 0 1.88-2.36 8.56 8.56 0 0 1-2.71 1.04 4.29 4.29 0 0 0-7.34 2.93c0 .34.04.67.1 1a12.16 12.16 0 0 1-8.83-4.48 4.29 4.29 0 0 0 1.32 5.72 4.23 4.23 0 0 1-1.94-.54v.06c0 2 1.4 3.77 3.33 4.16a4.3 4.3 0 0 1-1.93.07 4.29 4.29 0 0 0 4 2.97 8.6 8.6 0 0 1-5.34 1.84c-.35 0-.7-.02-1.04-.06a12.14 12.14 0 0 0 18.69-10.2c0-.18 0-.36-.01-.54a8.62 8.62 0 0 0 2.12-2.2Z"/></svg>
             </span>
-            <div class="card-text">
-              <strong>Twitter</strong>
-              <span>@arunodmanohara</span>
-            </div>
+            <div class="card-text"><strong>Twitter</strong><span>@arunodmanohara</span></div>
           </a>
-
-          <a class="card tilt" data-tilt="off" href="https://www.instagram.com/arunodmanoharaofficial?igsh=MWZubnFuOW02Z2hkYg==" target="_blank" rel="noreferrer noopener me" aria-label="Instagram" itemprop="sameAs">
+          <a class="card tilt" href="https://www.instagram.com/arunodmanoharaofficial?igsh=MWZubnFuOW02Z2hkYg==" target="_blank" rel="noreferrer noopener me" aria-label="Instagram" itemprop="sameAs">
             <span class="icon instagram">
-              <!-- Instagram -->
               <svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><path fill="currentColor" d="M7 2C4.24 2 2 4.24 2 7v10c0 2.76 2.24 5 5 5h10c2.76 0 5-2.24 5-5V7c0-2.76-2.24-5-5-5H7zm0 2h10c1.66 0 3 1.34 3 3v10c0 1.66-1.34 3-3 3H7c-1.66 0-3-1.34-3-3V7c0-1.66 1.34-3 3-3zm5 3.2A4.8 4.8 0 1 0 16.8 12 4.81 4.81 0 0 0 12 7.2zm0 2A2.8 2.8 0 1 1 9.2 12 2.8 2.8 0 0 1 12 9.2zM17.85 6.6a1.15 1.15 0 1 0 1.15 1.15 1.15 1.15 0 0 0-1.15-1.15z"/></svg>
             </span>
-            <div class="card-text">
-              <strong>Instagram</strong>
-              <span>/arunodmanoharaofficial</span>
-            </div>
+            <div class="card-text"><strong>Instagram</strong><span>/arunodmanoharaofficial</span></div>
           </a>
-
-          <a class="card tilt" data-tilt="off" href="https://www.facebook.com/share/1G4SKRrsj8/" target="_blank" rel="noreferrer noopener me" aria-label="Facebook" itemprop="sameAs">
+          <a class="card tilt" href="https://www.facebook.com/share/1G4SKRrsj8/" target="_blank" rel="noreferrer noopener me" aria-label="Facebook" itemprop="sameAs">
             <span class="icon facebook">
-              <!-- Facebook -->
               <svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><path fill="currentColor" d="M22 12.07C22 6.5 17.52 2 12 2S2 6.5 2 12.07c0 5 3.66 9.15 8.44 9.93v-7.03H8.08v-2.9h2.36V9.41c0-2.33 1.39-3.62 3.52-3.62.7 0 1.45.12 2.15.23v2.37h-1.21c-1.19 0-1.56.74-1.56 1.49v1.8h2.65l-.42 2.9h-2.23V22c4.78-.78 8.44-4.93 8.44-9.93Z"/></svg>
             </span>
-            <div class="card-text">
-              <strong>Facebook</strong>
-              <span>@arunodmanohara</span>
-            </div>
+            <div class="card-text"><strong>Facebook</strong><span>@arunodmanohara</span></div>
           </a>
-
-          <a class="card tilt" data-tilt="off" href="https://open.spotify.com/user/31o6pgalotkdzvbczitx56mghigi?si=1H88WmHMSjaw0Df_YeU40Q" target="_blank" rel="noreferrer noopener me" aria-label="Spotify - Arunod Manohara" itemprop="sameAs">
+          <a class="card tilt" href="https://open.spotify.com/user/31o6pgalotkdzvbczitx56mghigi?si=1H88WmHMSjaw0Df_YeU40Q" target="_blank" rel="noreferrer noopener me" aria-label="Spotify - Arunod Manohara" itemprop="sameAs">
             <span class="icon spotify">
-              <!-- Spotify -->
               <svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><path fill="currentColor" d="M12 0C5.371 0 0 5.371 0 12c0 6.629 5.371 12 12 12s12-5.371 12-12C24 5.371 18.629 0 12 0zm5.483 17.318a.747.747 0 0 1-1.027.247c-2.812-1.722-6.356-2.111-10.534-1.157a.746.746 0 0 1-.325-1.456c4.659-1.045 8.633-.602 11.73 1.312a.746.746 0 0 1 .256 1.054zm1.467-3.262a.93.93 0 0 1-1.28.309c-3.213-1.964-8.107-2.532-11.887-1.386a.93.93 0 0 1-.533-1.78c4.295-1.289 9.78-.645 13.437 1.566.432.264.569.83.263 1.29zm.124-3.389a1.115 1.115 0 0 1-1.536.37c-3.668-2.222-9.266-2.428-12.632-1.33a1.115 1.115 0 0 1-.647-2.133c3.932-1.195 10.199-.946 14.473 1.523a1.115 1.115 0 0 1 .342 1.57z"/></svg>
             </span>
-            <div class="card-text">
-              <strong>Spotify</strong>
-              <span>Arunod Manohara</span>
-            </div>
+            <div class="card-text"><strong>Spotify</strong><span>Arunod Manohara</span></div>
           </a>
         </div>
       </section>
 
       <section id="contact" class="contact container reveal">
-        <h2>Let&rsquo;s Collaborate</h2>
+        <h2 class="section-heading">Let&rsquo;s Collaborate</h2>
         <div class="contact-card">
-          <p>
-            Building a security-first product or need a developer who understands infrastructure hardening? Drop me a note and I&rsquo;ll get back within a day.
-          </p>
+          <p>Building a security-first product or need a developer who understands infrastructure hardening? Drop me a note and I&rsquo;ll get back within a day.</p>
           <div class="contact-actions">
             <a class="btn primary" href="mailto:contact@arunod.us?subject=Project%20idea%20from%20your%20site">Email me</a>
             <a class="btn ghost" href="https://www.linkedin.com/in/arunod-manohara-7613b6230/" target="_blank" rel="noreferrer noopener">Connect on LinkedIn</a>
@@ -495,4 +467,3 @@
     <!-- End Cloudflare Web Analytics -->
   </body>
 </html>
-
