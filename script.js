@@ -107,28 +107,25 @@
 
     // Tech stack meters: animate from 0 when visible
     const meters = Array.from(document.querySelectorAll('.stack-meter'));
-    const getMeterLevel = (el) => {
-      const inline = el.style.getPropertyValue('--level');
-      if (inline) return inline.trim();
-      const computed = getComputedStyle(el).getPropertyValue('--level');
-      return (computed && computed.trim()) || '70%';
-    };
     if (meters.length) {
+      meters.forEach(m => {
+        m._targetWidth = m.style.getPropertyValue('--meter') || m.style.getPropertyValue('--level') || '70%';
+      });
       if (prefersReduced()) {
-        meters.forEach(meter => meter.style.setProperty('--meter', getMeterLevel(meter)));
+        meters.forEach(meter => meter.style.setProperty('--meter', meter._targetWidth));
       } else if ('IntersectionObserver' in window) {
         meters.forEach(meter => meter.style.setProperty('--meter', '0%'));
         const meterObserver = new IntersectionObserver((entries, observer) => {
           for (const entry of entries) {
             if (!entry.isIntersecting) continue;
             const meter = entry.target;
-            meter.style.setProperty('--meter', getMeterLevel(meter));
+            meter.style.setProperty('--meter', meter._targetWidth);
             observer.unobserve(meter);
           }
         }, { threshold: 0.35, rootMargin: '0px 0px -10% 0px' });
         meters.forEach(meter => meterObserver.observe(meter));
       } else {
-        meters.forEach(meter => meter.style.setProperty('--meter', getMeterLevel(meter)));
+        meters.forEach(meter => meter.style.setProperty('--meter', meter._targetWidth));
       }
     }
 
