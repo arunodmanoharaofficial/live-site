@@ -66,6 +66,7 @@
   transform-origin: bottom center;
   animation: crownFloat 3s ease-in-out infinite;
   filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.6));
+  -webkit-text-fill-color: initial; /* Fixes emoji disappearing inside gradient text */
 }
 
 @keyframes crownFloat {

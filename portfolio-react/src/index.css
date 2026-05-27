@@ -412,6 +412,15 @@ h1, h2, h3, h4 {
   flex-shrink: 0;
 }
 
+/* Global Animated Emoji */
+.animatedEmoji {
+  display: inline-block;
+  margin-right: 0.3em;
+  animation: floatEmoji 3s ease-in-out infinite;
+  transform-origin: bottom center;
+  -webkit-text-fill-color: initial;
+}
+
 /* ── Utility ─────────────────────────────────── */
 .sr-only {
   position: absolute;
