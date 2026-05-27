@@ -133,11 +133,35 @@
 }
 
 
+.hashtagBox {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
 .hashtag {
   font-family: var(--font-mono);
   font-size: 0.8rem;
   color: var(--text-dim);
   letter-spacing: 0.08em;
+}
+
+.founder {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  flex-wrap: wrap;
+}
+
+.godsofdata {
+  color: var(--primary);
+  font-weight: 700;
+  text-shadow: 0 0 10px rgba(0, 255, 159, 0.4);
+  letter-spacing: 0.1em;
 }
 
 /* Terminal block */

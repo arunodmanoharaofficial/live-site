@@ -16,6 +16,10 @@ export default function Footer() {
           <span className={styles.brandName}>Arunod Manohara</span>
           <span className={styles.brandTag}>@root:~$</span>
         </div>
+        
+        <div className={styles.founderText}>
+           Founder of <strong>GODSOFDATA</strong> Dev Team 🔱💻🚀
+        </div>
         <p className={styles.copy}>
           <span className={styles.green}>©</span> {year} — All systems operating nominally under{' '}
           <span className={styles.accent}>zero trust architecture.</span>

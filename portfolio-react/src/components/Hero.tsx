@@ -182,10 +182,13 @@ export default function Hero() {
             </m.span>
           </m.h1>
 
-          {/* Hashtag */}
-          <m.p variants={fadeUp} className={styles.hashtag}>
-            #arunodmanoharaofficial
-          </m.p>
+          {/* Hashtag & Founder */}
+          <m.div variants={fadeUp} className={styles.hashtagBox}>
+            <p className={styles.hashtag}>#arunodmanoharaofficial</p>
+            <p className={styles.founder}>
+              Founder of <span className={styles.godsofdata}>GODSOFDATA</span> Dev Team 🔱👑🚀
+            </p>
+          </m.div>
 
           {/* Terminal typewriter */}
           <m.div variants={fadeUp} className={styles.terminal}>

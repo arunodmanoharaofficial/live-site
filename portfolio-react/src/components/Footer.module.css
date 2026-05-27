@@ -8,17 +8,32 @@
 
 .inner {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-  padding-top: 1.5rem;
-  padding-bottom: 1.5rem;
-  gap: 1rem;
-  flex-wrap: wrap;
+  justify-content: center;
+  padding-top: 2rem;
+  padding-bottom: 4rem; /* space for the floating nav on small screens */
+  gap: 1.5rem;
+  text-align: center;
 }
 
 .brand {
   display: flex;
   flex-direction: column;
+  align-items: center;
+}
+
+.founderText {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+.founderText strong {
+  color: var(--primary);
+  font-weight: 700;
+  text-shadow: 0 0 8px rgba(0, 255, 159, 0.4);
 }
 
 .brandName {
