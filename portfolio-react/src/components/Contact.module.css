@@ -1,0 +1,178 @@
+.card {
+  position: relative;
+  overflow: hidden;
+}
+
+.glow1 {
+  position: absolute;
+  top: -80px; right: -80px;
+  width: 350px; height: 350px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0,255,159,0.08), transparent 70%);
+  pointer-events: none;
+}
+
+.glow2 {
+  position: absolute;
+  bottom: -60px; left: -60px;
+  width: 250px; height: 250px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0,212,255,0.06), transparent 70%);
+  pointer-events: none;
+}
+
+.termHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.7rem 1.5rem;
+  background: rgba(0,255,159,0.03);
+  border-bottom: 1px solid var(--border);
+}
+
+.dot {
+  width: 11px; height: 11px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.termLabel {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--text-dim);
+  letter-spacing: 0.05em;
+  margin-left: 0.4rem;
+}
+
+.body {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 3rem;
+  padding: 2.5rem;
+  align-items: center;
+}
+
+.left { display: flex; flex-direction: column; gap: 1.25rem; }
+
+.desc {
+  color: rgba(214,255,232,0.75);
+  font-size: 0.95rem;
+  line-height: 1.75;
+}
+
+.infoRows { display: flex; flex-direction: column; gap: 0.5rem; }
+
+.infoRow {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+}
+
+.infoKey {
+  width: 90px;
+  flex-shrink: 0;
+  color: var(--text-dim);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+}
+
+.infoVal {
+  color: var(--text);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+a.infoVal:hover { color: var(--primary); }
+
+.infoValGreen {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--primary);
+  font-weight: 600;
+}
+
+.actions { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+
+.note {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--text-dim);
+}
+
+/* Mini terminal */
+.right {}
+
+.miniTerm {
+  border-radius: var(--radius-md);
+  background: #010603;
+  border: 1px solid rgba(0,255,159,0.2);
+  overflow: hidden;
+}
+
+.miniTermH {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 0.9rem;
+  background: rgba(0,255,159,0.04);
+  border-bottom: 1px solid rgba(0,255,159,0.1);
+}
+
+.miniDot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--primary);
+  box-shadow: 0 0 6px var(--primary);
+  animation: blink 1.5s infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.3; }
+}
+
+.miniLabel {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--text-dim);
+}
+
+.miniTermBody {
+  padding: 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  line-height: 1.7;
+  display: flex;
+  flex-direction: column;
+  gap: 0.05rem;
+}
+
+.cmd  { color: var(--primary); }
+.info { color: rgba(214,255,232,0.6); }
+.blank { color: transparent; height: 0.5rem; }
+
+.termCursor {
+  display: inline-block;
+  animation: blink 0.8s step-end infinite;
+  color: var(--primary);
+}
+
+@media (max-width: 900px) {
+  .body { grid-template-columns: 1fr; }
+  .right { display: none; }
+}
+
+@media (max-width: 540px) {
+  .body { padding: 1.25rem; gap: 1rem; }
+  .actions { flex-direction: column; }
+  .actions .btn { width: 100%; justify-content: center; }
+  .infoRow { flex-direction: column; gap: 0.2rem; }
+  .infoKey { width: auto; }
+}
+
+@media (max-width: 380px) {
+  .termHeader { padding: 0.5rem 1rem; }
+}

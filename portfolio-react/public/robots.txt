@@ -1,0 +1,26 @@
+# Arunod Manohara — robots.txt
+# https://www.arunod.us/
+
+User-agent: *
+Allow: /
+
+# Block build artifacts
+Disallow: /node_modules/
+Disallow: /.git/
+Disallow: /src/
+
+# Sitemap location
+Sitemap: https://www.arunod.us/sitemap.xml
+
+# Crawl delay (be polite)
+Crawl-delay: 10
+
+# Google-specific
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 5
+
+# Bing
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 10

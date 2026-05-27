@@ -1,0 +1,123 @@
+.head {
+  margin-bottom: 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1rem;
+}
+
+.card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.1rem 1.25rem;
+  cursor: default;
+}
+
+.iconWrap {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-md);
+  background: color-mix(in srgb, var(--skill-color) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--skill-color) 25%, transparent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  padding: 6px;
+  box-shadow: 0 4px 12px color-mix(in srgb, var(--skill-color) 10%, transparent);
+  transition: box-shadow 0.3s ease;
+}
+
+.card:hover .iconWrap {
+  box-shadow: 0 4px 20px color-mix(in srgb, var(--skill-color) 30%, transparent);
+}
+
+.iconWrap svg { width: 100%; height: 100%; display: block; }
+
+.info { flex: 1; min-width: 0; }
+
+.nameRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+.skillName {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.skillLevel {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.meterTrack {
+  position: relative;
+  height: 4px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 99px;
+  overflow: visible;
+}
+
+.meterFill {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  border-radius: 99px;
+  background: linear-gradient(90deg, var(--skill-color), color-mix(in srgb, var(--skill-color) 60%, var(--primary)));
+  box-shadow: 0 0 8px color-mix(in srgb, var(--skill-color) 60%, transparent);
+}
+
+.meterPct {
+  position: absolute;
+  right: 0;
+  top: -18px;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  color: var(--text-muted);
+}
+
+@media (max-width: 600px) {
+  .grid { grid-template-columns: 1fr; }
+}
+
+/* Spinning gear emoji next to heading */
+.headEmoji {
+  display: inline-block;
+  animation: gearSpin 6s linear infinite;
+  transform-origin: center;
+}
+
+@keyframes gearSpin {
+  0%   { transform: rotate(0deg);   }
+  100% { transform: rotate(360deg); }
+}
+
+/* Bounce icon on card hover */
+.card:hover .iconWrap svg {
+  animation: iconBounce 0.5s ease;
+}
+
+@keyframes iconBounce {
+  0%   { transform: scale(1);    }
+  30%  { transform: scale(1.25) rotate(-8deg); }
+  60%  { transform: scale(0.92) rotate(4deg);  }
+  100% { transform: scale(1);    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .headEmoji { animation: none !important; }
+}

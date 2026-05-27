@@ -1,0 +1,278 @@
+/* ── Page ───────────────────────────────────────────── */
+.page {
+  min-height: 100vh;
+  background: #040704;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Background grid */
+.page::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 69, 96, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 69, 96, 0.025) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+}
+
+/* CRT scanlines */
+.scanlines {
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.1) 2px,
+    rgba(0, 0, 0, 0.1) 4px
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Red glitch ambient */
+.glitch {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(255, 69, 96, 0.04) 0%,
+    transparent 65%
+  );
+  pointer-events: none;
+  animation: glitchPulse 3s ease-in-out infinite alternate;
+}
+
+@keyframes glitchPulse {
+  from { opacity: 0.6; }
+  to   { opacity: 1;   }
+}
+
+/* ── Terminal window ────────────────────────────────── */
+.terminal {
+  width: 100%;
+  max-width: 720px;
+  background: #040704;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 69, 96, 0.3);
+  box-shadow:
+    0 0 0 1px rgba(255, 69, 96, 0.08),
+    0 0 60px rgba(255, 69, 96, 0.1),
+    0 30px 80px rgba(0, 0, 0, 0.8);
+  overflow: hidden;
+  position: relative;
+  z-index: 2;
+}
+
+/* ── Title bar ──────────────────────────────────────── */
+.titleBar {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1rem;
+  background: rgba(255, 69, 96, 0.05);
+  border-bottom: 1px solid rgba(255, 69, 96, 0.15);
+}
+
+.dot {
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  display: block;
+  flex-shrink: 0;
+}
+
+.barTitle {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.68rem;
+  color: rgba(214, 255, 232, 0.3);
+  margin-left: 0.5rem;
+  letter-spacing: 0.05em;
+}
+
+/* ── Body ───────────────────────────────────────────── */
+.body {
+  padding: 1.5rem 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+/* ── Panic header ───────────────────────────────────── */
+.panicHeader {
+  text-align: center;
+  padding: 0.75rem 0;
+}
+
+.errorCode {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem;
+  color: rgba(255, 69, 96, 0.7);
+  letter-spacing: 0.2em;
+  margin-bottom: 0.4rem;
+}
+
+.errorTitle {
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(2rem, 8vw, 3.5rem);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  background: linear-gradient(135deg, #ff4560, #ff8099, #ff4560);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 3s linear infinite;
+}
+
+@keyframes shimmer {
+  0%   { background-position: 0%   center; }
+  100% { background-position: 200% center; }
+}
+
+/* ── Divider ────────────────────────────────────────── */
+.divider {
+  height: 1px;
+  background: rgba(255, 69, 96, 0.18);
+}
+
+/* ── Details ────────────────────────────────────────── */
+.details { display: flex; flex-direction: column; gap: 0.3rem; }
+
+.detailLine {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
+  display: flex;
+  gap: 0.75rem;
+}
+
+.key { color: rgba(214, 255, 232, 0.35); flex-shrink: 0; }
+.val { color: rgba(214, 255, 232, 0.75); }
+.err { color: #ff4560; font-weight: 700; }
+
+/* ── Traceroute ─────────────────────────────────────── */
+.trace { display: flex; flex-direction: column; gap: 0.2rem; }
+
+.traceTitle {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  color: rgba(214, 255, 232, 0.35);
+  margin-bottom: 0.3rem;
+}
+
+.hop {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.76rem;
+  line-height: 1.5;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.hopNum     { color: rgba(214, 255, 232, 0.35); min-width: 2ch; }
+.hopHost    { color: rgba(214, 255, 232, 0.75); }
+.hopIp      { color: rgba(0, 212, 255, 0.55); }
+.hopMs      { color: #00ff9f; margin-left: auto; }
+.hopTimeout { color: rgba(214, 255, 232, 0.25); }
+.hopErr     { color: #ff4560; font-weight: 700; }
+
+/* ── Reconnect section ──────────────────────────────── */
+.reconnect { display: flex; flex-direction: column; gap: 0.35rem; padding-top: 0.25rem; }
+
+.reconnectLine {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
+  color: rgba(214, 255, 232, 0.7);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.spinner {
+  color: #00ff9f;
+  animation: spin 1.5s linear infinite;
+  display: inline-block;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+.ok { color: #00ff9f; }
+
+.redirectLine {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
+  color: rgba(214, 255, 232, 0.55);
+  margin-top: 0.25rem;
+}
+
+.url { color: #00d4ff; }
+
+.countdown {
+  color: #febc2e;
+  font-weight: 700;
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.4; }
+}
+
+/* ── Action button ──────────────────────────────────── */
+.actions {
+  padding-top: 0.5rem;
+  display: flex;
+  justify-content: center;
+}
+
+.homeBtn {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  padding: 0.6rem 1.8rem;
+  background: rgba(0, 255, 159, 0.07);
+  border: 1px solid rgba(0, 255, 159, 0.35);
+  border-radius: 8px;
+  color: #00ff9f;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: background 0.2s, box-shadow 0.2s;
+}
+
+.homeBtn:hover {
+  background: rgba(0, 255, 159, 0.14);
+  box-shadow: 0 0 20px rgba(0, 255, 159, 0.2);
+}
+
+/* ── Footer label ───────────────────────────────────── */
+.pageLabel {
+  margin-top: 2rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  color: rgba(214, 255, 232, 0.15);
+  letter-spacing: 0.2em;
+  position: relative;
+  z-index: 2;
+}
+
+/* ── Mobile ─────────────────────────────────────────── */
+@media (max-width: 540px) {
+  .body { padding: 1.25rem 1.1rem; }
+  .errorTitle { font-size: 2.2rem; }
+  .detailLine { font-size: 0.72rem; }
+  .hop { font-size: 0.68rem; }
+  .hopMs { margin-left: 0.5rem; }
+}

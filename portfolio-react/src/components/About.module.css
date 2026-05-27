@@ -1,0 +1,189 @@
+.wrap {
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  gap: 5rem;
+  align-items: center;
+}
+
+/* Avatar */
+.avatarWrap {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.avatarRing {
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  padding: 4px;
+  background: conic-gradient(from 0deg, var(--primary), var(--accent), var(--primary));
+  animation: spin 8s linear infinite;
+  flex-shrink: 0;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+.avatarRing2 {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: var(--bg-2);
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: spin 8s linear infinite reverse;
+  overflow: hidden;
+}
+
+.avatar {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+
+.avatarBadge {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%) translateY(50%);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: var(--glass-heavy);
+  border: 1px solid var(--border-glow);
+  border-radius: 99px;
+  padding: 0.3rem 0.9rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--primary);
+  white-space: nowrap;
+  backdrop-filter: blur(12px);
+  box-shadow: var(--glow-primary);
+}
+
+.floatTag {
+  position: absolute;
+  animation: floatY 3s ease-in-out infinite alternate;
+}
+
+@keyframes floatY {
+  from { transform: translateY(0); }
+  to   { transform: translateY(-8px); }
+}
+
+/* Content */
+.content { display: flex; flex-direction: column; gap: 1.25rem; }
+
+.para {
+  color: rgba(214,255,232,0.8);
+  font-size: 0.95rem;
+  line-height: 1.8;
+}
+
+.para strong { color: var(--primary); font-weight: 600; }
+
+/* Stats */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.75rem;
+}
+
+.statBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 1rem 0.5rem;
+  gap: 0.2rem;
+}
+
+.statValue {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.statLabel {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.statSub {
+  font-size: 0.68rem;
+  color: var(--text-dim);
+}
+
+/* Animated emoji inside stat box */
+.statEmoji {
+  font-size: 1.5rem;
+  display: block;
+  animation: emojiPop 3s ease-in-out infinite;
+  transform-origin: center;
+}
+
+.statBox:nth-child(2) .statEmoji { animation-delay: -0.75s; }
+.statBox:nth-child(3) .statEmoji { animation-delay: -1.5s;  }
+.statBox:nth-child(4) .statEmoji { animation-delay: -2.25s; }
+
+@keyframes emojiPop {
+  0%,100% { transform: scale(1)    rotate(0deg);   }
+  20%      { transform: scale(1.22) rotate(-8deg);  }
+  40%      { transform: scale(0.95) rotate(5deg);   }
+  60%      { transform: scale(1.15) rotate(-4deg);  }
+  80%      { transform: scale(1)    rotate(3deg);   }
+}
+
+/* Heading emoji wiggle */
+.headingEmoji {
+  display: inline-block;
+  animation: headingWiggle 4s ease-in-out infinite;
+  transform-origin: bottom center;
+}
+
+@keyframes headingWiggle {
+  0%,100% { transform: rotate(0deg) scale(1);    }
+  15%      { transform: rotate(-12deg) scale(1.1); }
+  30%      { transform: rotate(8deg) scale(1.05);  }
+  45%      { transform: rotate(-6deg) scale(1.08); }
+  60%      { transform: rotate(4deg) scale(1);     }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .statEmoji, .headingEmoji { animation: none !important; }
+}
+
+@media (max-width: 900px) {
+  .wrap { grid-template-columns: 1fr; gap: 2.5rem; }
+  .avatarWrap { max-width: 280px; margin: 0 auto; }
+  .avatarRing { width: 240px; height: 240px; }
+  .stats { grid-template-columns: repeat(2, 1fr); }
+  /* Reposition floating tags so they don't overflow */
+  .floatTag { display: none; }
+}
+
+@media (max-width: 540px) {
+  .avatarRing { width: 190px; height: 190px; }
+  .avatarWrap { max-width: 220px; }
+  .para { font-size: 0.88rem; }
+  .stats { gap: 0.5rem; }
+  .statBox { padding: 0.75rem 0.25rem; }
+  .statValue { font-size: 1.05rem; }
+  .avatarBadge { font-size: 0.65rem; padding: 0.25rem 0.7rem; }
+}

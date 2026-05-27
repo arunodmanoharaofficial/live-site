@@ -1,0 +1,111 @@
+/* Matrix Rain overlay */
+.wrap {
+  position: fixed;
+  inset: 0;
+  z-index: 99990;
+  background: #000;
+}
+
+.canvas {
+  position: absolute;
+  inset: 0;
+  display: block;
+}
+
+/* Radial vignette */
+.vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 40%,
+    rgba(0, 0, 0, 0.65) 100%
+  );
+  pointer-events: none;
+}
+
+/* Center "welcome" message */
+.enterMsg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  pointer-events: none;
+  animation: msgFade 3s ease forwards;
+  animation-delay: 1s;
+}
+
+@keyframes msgFade {
+  0%   { opacity: 1; }
+  70%  { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+.msgLine1 {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: clamp(1.2rem, 4vw, 2rem);
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  color: #00ff9f;
+  text-shadow:
+    0 0 20px #00ff9f,
+    0 0 60px rgba(0, 255, 159, 0.5);
+}
+
+.msgLine2 {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: clamp(0.75rem, 2vw, 1rem);
+  color: rgba(0, 255, 159, 0.55);
+  margin-top: 0.5rem;
+  letter-spacing: 0.15em;
+}
+
+/* Bottom controls */
+.controls {
+  position: absolute;
+  bottom: 2.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.hint {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  color: rgba(0, 255, 159, 0.45);
+  letter-spacing: 0.08em;
+}
+
+.kbd {
+  display: inline-block;
+  background: rgba(0, 255, 159, 0.12);
+  border: 1px solid rgba(0, 255, 159, 0.35);
+  border-radius: 4px;
+  padding: 0.1em 0.45em;
+  font-family: inherit;
+  font-size: 0.7rem;
+  color: rgba(0, 255, 159, 0.7);
+}
+
+.exitBtn {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  padding: 0.55rem 1.75rem;
+  background: rgba(0, 255, 159, 0.08);
+  border: 1px solid rgba(0, 255, 159, 0.4);
+  border-radius: 6px;
+  color: #00ff9f;
+  cursor: pointer;
+  transition: background 0.2s, box-shadow 0.2s;
+}
+
+.exitBtn:hover {
+  background: rgba(0, 255, 159, 0.16);
+  box-shadow: 0 0 20px rgba(0, 255, 159, 0.25);
+}
