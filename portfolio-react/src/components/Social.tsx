@@ -76,7 +76,7 @@ export default function Social() {
           style={{ marginBottom:'2.5rem' }}
         >
           <span className="section-label">04. Social</span>
-          <h2 className="section-heading">Telemetry <span className="hl">Vectors</span></h2>
+          <h2 className="section-heading"><span className="animatedEmoji" aria-label="satellite">🛰️</span> Telemetry <span className="hl">Vectors</span></h2>
           <p className="muted">Establish contact across all channels.</p>
         </m.div>
 

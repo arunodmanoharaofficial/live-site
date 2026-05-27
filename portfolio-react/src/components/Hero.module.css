@@ -56,6 +56,22 @@
 
 @media (prefers-reduced-motion: reduce) {
   .waveEmoji { animation: none !important; }
+  .crownEmoji { animation: none !important; }
+}
+
+.crownEmoji {
+  display: inline-block;
+  font-size: 0.85em; /* slightly smaller than the name text */
+  margin-right: 0.1em;
+  transform-origin: bottom center;
+  animation: crownFloat 3s ease-in-out infinite;
+  filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.6));
+}
+
+@keyframes crownFloat {
+  0%   { transform: translateY(0) rotate(0deg); }
+  50%  { transform: translateY(-8px) rotate(5deg) scale(1.1); filter: drop-shadow(0 0 16px rgba(255, 215, 0, 0.9)); }
+  100% { transform: translateY(0) rotate(0deg); }
 }
 
 .name {

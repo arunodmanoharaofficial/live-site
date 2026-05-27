@@ -27,7 +27,7 @@ export default function Contact() {
             <div className={styles.left}>
               <span className="section-label">05. Contact</span>
               <h2 className="section-heading">
-                Initiate Secure <span className="hl">Handshake</span>
+                <span className="animatedEmoji" aria-label="handshake">🤝</span> Initiate Secure <span className="hl">Handshake</span>
               </h2>
               <p className={styles.desc}>
                 Architecting security-first products or auditing infrastructure hardening?

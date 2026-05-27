@@ -178,7 +178,7 @@ export default function Hero() {
               }}
               title="Arunod Manohara"
             >
-              {name || 'Arunod Manohara'}
+              <span className={styles.crownEmoji} aria-label="crown">👑</span> {name || 'Arunod Manohara'}
             </m.span>
           </m.h1>
 
