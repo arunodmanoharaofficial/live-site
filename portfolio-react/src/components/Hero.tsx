@@ -170,16 +170,19 @@ export default function Hero() {
               Hello, I&apos;m
               <span className={styles.waveEmoji} aria-label="wave">👋</span>
             </span>
-            <m.span
-              className={styles.name}
-              whileHover={{
-                scale: 1.03,
-                transition: { duration: 0.25, ease: 'easeOut' }
-              }}
-              title="Arunod Manohara"
-            >
-              <span className={styles.crownEmoji} aria-label="crown">👑</span> {name || 'Arunod Manohara'}
-            </m.span>
+            <div className={styles.nameRow}>
+              <span className={styles.crownEmoji} aria-label="crown">👑</span>
+              <m.span
+                className={styles.name}
+                whileHover={{
+                  scale: 1.03,
+                  transition: { duration: 0.25, ease: 'easeOut' }
+                }}
+                title="Arunod Manohara"
+              >
+                {name || 'Arunod Manohara'}
+              </m.span>
+            </div>
           </m.h1>
 
           {/* Hashtag & Founder */}

@@ -82,7 +82,7 @@ body::before {
   z-index: 0;
 }
 
-/* CRT scanlines overlay */
+/* CRT scanlines overlay — static to avoid continuous repaints */
 body::after {
   content: '';
   position: fixed;
@@ -91,24 +91,12 @@ body::after {
     0deg,
     transparent,
     transparent 2px,
-    rgba(0, 0, 0, 0.07) 2px,
-    rgba(0, 0, 0, 0.07) 4px
+    rgba(0, 0, 0, 0.04) 2px,
+    rgba(0, 0, 0, 0.04) 4px
   );
   pointer-events: none;
   z-index: 9998;
-  /* Only animate if user has no motion preference — avoids continuous repaints */
-  animation: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  body::after {
-    animation: scanMove 12s linear infinite;
-  }
-}
-
-@keyframes scanMove {
-  0%   { background-position: 0 0; }
-  100% { background-position: 0 100px; }
+  /* Kept static — animated scanlines cause full-viewport repaints and flicker */
 }
 
 ::-webkit-scrollbar { width: 5px; }
@@ -381,12 +369,12 @@ h1, h2, h3, h4 {
   border-radius: 50%;
   background: var(--primary);
   box-shadow: 0 0 8px var(--primary);
-  animation: blink 1.5s ease-in-out infinite;
+  animation: softPulse 2.5s ease-in-out infinite;
 }
 
-@keyframes blink {
+@keyframes softPulse {
   0%, 100% { opacity: 1; }
-  50%       { opacity: 0.3; }
+  50%       { opacity: 0.5; }
 }
 
 /* ── Pill ────────────────────────────────────── */
@@ -408,7 +396,7 @@ h1, h2, h3, h4 {
   border-radius: 50%;
   background: var(--primary);
   box-shadow: 0 0 10px var(--primary);
-  animation: blink 1.5s ease-in-out infinite;
+  animation: softPulse 2.5s ease-in-out infinite;
   flex-shrink: 0;
 }
 
