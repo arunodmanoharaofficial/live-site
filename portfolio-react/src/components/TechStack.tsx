@@ -41,7 +41,32 @@ const skills = [
   {
     name: 'Linux', level: 'Advanced', pct: 88, color: '#FCC624',
     icon: (
-      <svg viewBox="0 0 128 128"><path fill="#FCC624" d="M64 9C28.7 9 0 37.7 0 73s28.7 64 64 64 64-28.7 64-64S99.3 9 64 9zm0 10c29.8 0 54 24.2 54 54s-24.2 54-54 54S10 102.8 10 73 34.2 19 64 19z"/><path fill="#FCC624" d="M50 58c-5.5 0-10 4.5-10 10s4.5 10 10 10 10-4.5 10-10-4.5-10-10-10zm28 0c-5.5 0-10 4.5-10 10s4.5 10 10 10 10-4.5 10-10-4.5-10-10-10z"/><path fill="#FCC624" d="M40 90s6 12 24 12 24-12 24-12H40z"/></svg>
+      <svg viewBox="0 0 128 128">
+        {/* Tux body */}
+        <ellipse cx="64" cy="90" rx="28" ry="32" fill="#1a1a1a"/>
+        {/* White belly */}
+        <ellipse cx="64" cy="95" rx="18" ry="22" fill="#f5f5f5"/>
+        {/* Head */}
+        <ellipse cx="64" cy="44" rx="24" ry="26" fill="#1a1a1a"/>
+        {/* Face / beak area */}
+        <ellipse cx="64" cy="52" rx="14" ry="10" fill="#FCC624"/>
+        {/* Eyes */}
+        <circle cx="57" cy="42" r="4" fill="#fff"/>
+        <circle cx="71" cy="42" r="4" fill="#fff"/>
+        <circle cx="58" cy="43" r="2" fill="#1a1a1a"/>
+        <circle cx="72" cy="43" r="2" fill="#1a1a1a"/>
+        {/* Eye shine */}
+        <circle cx="59" cy="42" r="0.8" fill="#fff"/>
+        <circle cx="73" cy="42" r="0.8" fill="#fff"/>
+        {/* Beak */}
+        <ellipse cx="64" cy="55" rx="7" ry="4" fill="#e8a000"/>
+        {/* Feet */}
+        <ellipse cx="52" cy="120" rx="9" ry="5" fill="#FCC624"/>
+        <ellipse cx="76" cy="120" rx="9" ry="5" fill="#FCC624"/>
+        {/* Wings */}
+        <ellipse cx="36" cy="88" rx="10" ry="22" fill="#1a1a1a" transform="rotate(-10 36 88)"/>
+        <ellipse cx="92" cy="88" rx="10" ry="22" fill="#1a1a1a" transform="rotate(10 92 88)"/>
+      </svg>
     )
   },
   {
