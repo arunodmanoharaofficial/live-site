@@ -443,8 +443,38 @@ h1, h2, h3, h4 {
   .container { padding: 0 0.9rem; }
 }
 
-/* Touch devices: restore system cursor, disable CRT scanlines for perf */
+/* ═══ Touch / Mobile performance ════════════════════════
+   The biggest scroll-lag culprits on mobile are:
+   1. backdrop-filter: blur() — forces GPU readback on every scroll frame
+   2. Multiple box-shadows with blur radii
+   3. CSS animations on many elements simultaneously
+   ════════════════════════════════════════════════════════ */
 @media (hover: none), (pointer: coarse) {
+  /* Restore system cursor */
   .no-cursor, .no-cursor * { cursor: auto !important; }
-  body::after { animation: none; }
+
+  /* Kill backdrop-filter — single biggest perf win */
+  .glass-card,
+  .fab-matrix,
+  .fab-terminal {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+
+  /* Simplify box-shadows on mobile */
+  .glass-card {
+    box-shadow: 0 2px 12px rgba(0,0,0,0.4);
+  }
+  .glass-card:hover {
+    box-shadow: 0 2px 12px rgba(0,0,0,0.4);
+  }
+
+  /* Disable hover transitions that don't apply on touch */
+  .glass-card { transition: none; }
+
+  /* Use content-visibility for off-screen sections */
+  section {
+    content-visibility: auto;
+    contain-intrinsic-size: 0 500px;
+  }
 }

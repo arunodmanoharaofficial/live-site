@@ -80,6 +80,11 @@
   .emoji { animation: none !important; }
 }
 
+/* ── Touch/mobile — hide entirely to eliminate compositing overhead ── */
+@media (hover: none), (pointer: coarse) {
+  .root { display: none; }
+}
+
 /* ── Mobile — tone down opacity, smaller range ─────── */
 @media (max-width: 768px) {
   .emoji { opacity: 0.09; }

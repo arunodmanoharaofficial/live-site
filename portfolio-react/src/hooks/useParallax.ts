@@ -53,6 +53,9 @@ export function useParallax<T extends HTMLElement = HTMLElement>(speed = 0.3) {
     // Check for reduced motion preference
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
 
+    // Disable parallax on touch devices — rAF on scroll causes jank
+    if (window.matchMedia('(hover: none), (pointer: coarse)').matches) return
+
     ensureGlobalListener()
     listeners.add(handler)
 
