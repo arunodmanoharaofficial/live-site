@@ -126,12 +126,12 @@ a.infoVal:hover { color: var(--primary); }
   border-radius: 50%;
   background: var(--primary);
   box-shadow: 0 0 6px var(--primary);
-  animation: blink 1.5s infinite;
+  animation: contactPulse 2.5s ease-in-out infinite;
 }
 
-@keyframes blink {
+@keyframes contactPulse {
   0%, 100% { opacity: 1; }
-  50%       { opacity: 0.3; }
+  50%       { opacity: 0.5; }
 }
 
 .miniLabel {
@@ -156,7 +156,7 @@ a.infoVal:hover { color: var(--primary); }
 
 .termCursor {
   display: inline-block;
-  animation: blink 0.8s step-end infinite;
+  animation: contactPulse 1.2s ease-in-out infinite;
   color: var(--primary);
 }
 
@@ -168,11 +168,15 @@ a.infoVal:hover { color: var(--primary); }
 @media (max-width: 540px) {
   .body { padding: 1.25rem; gap: 1rem; }
   .actions { flex-direction: column; }
-  .actions .btn { width: 100%; justify-content: center; }
+  .actions .btn { width: 100%; justify-content: center; min-height: 44px; }
   .infoRow { flex-direction: column; gap: 0.2rem; }
   .infoKey { width: auto; }
+  .desc { font-size: 0.88rem; }
 }
 
 @media (max-width: 380px) {
   .termHeader { padding: 0.5rem 1rem; }
+  .body { padding: 1rem; }
+  .infoRow { font-size: 0.75rem; }
+  .desc { font-size: 0.82rem; }
 }

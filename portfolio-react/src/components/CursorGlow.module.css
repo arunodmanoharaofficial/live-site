@@ -211,3 +211,8 @@
   pointer-events: none;
   z-index: 1;
 }
+
+/* Hide custom cursor on touch devices — saves GPU/battery */
+@media (hover: none), (pointer: coarse) {
+  .container { display: none !important; }
+}

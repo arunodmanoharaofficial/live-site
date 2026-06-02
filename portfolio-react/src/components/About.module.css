@@ -119,7 +119,7 @@
 
 .statLabel {
   font-family: var(--font-mono);
-  font-size: 0.62rem;
+  font-size: 0.7rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--text-muted);
@@ -186,4 +186,15 @@
   .statBox { padding: 0.75rem 0.25rem; }
   .statValue { font-size: 1.05rem; }
   .avatarBadge { font-size: 0.65rem; padding: 0.25rem 0.7rem; }
+}
+
+/* Very small — 360px Motorola Edge etc. */
+@media (max-width: 380px) {
+  .avatarRing { width: 160px; height: 160px; }
+  .avatarWrap { max-width: 190px; }
+  .statBox { padding: 0.5rem 0.15rem; }
+  .statValue { font-size: 0.95rem; }
+  .statLabel { font-size: 0.65rem; }
+  .statSub { font-size: 0.62rem; }
+  .statEmoji { font-size: 1.2rem; }
 }

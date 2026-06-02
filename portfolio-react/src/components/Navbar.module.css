@@ -118,7 +118,9 @@
   background: none;
   border: none;
   cursor: pointer;
-  padding: 6px;
+  padding: 10px;
+  min-width: 44px;
+  min-height: 44px;
   border-radius: var(--radius-sm);
   transition: background 0.2s;
 }
@@ -156,7 +158,8 @@
   font-size: 0.85rem;
   color: var(--text-muted);
   text-decoration: none;
-  padding: 0.6rem 0.5rem;
+  padding: 0.75rem 0.5rem;
+  min-height: 44px;
   border-radius: var(--radius-sm);
   transition: color 0.2s, background 0.2s;
 }

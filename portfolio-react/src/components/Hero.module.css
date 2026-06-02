@@ -384,37 +384,45 @@
 /* Mobile */
 @media (max-width: 640px) {
   .hero {
-    padding-top: 5.5rem;
-    padding-bottom: 3rem;
+    padding-top: 4.5rem;
+    padding-bottom: 2.5rem;
     min-height: auto;
   }
-  .heroInner { gap: 2rem; }
+  .heroInner { gap: 1.5rem; }
 
   .hi { font-size: 0.88rem; }
 
-  .name { font-size: clamp(2rem, 11vw, 3rem); }
+  .name { font-size: clamp(2rem, 10vw, 3rem); }
 
   .hashtag { font-size: 0.72rem; }
+  .founder { font-size: 0.78rem; }
 
   .termBody { padding: 0.75rem 0.9rem; }
   .typeLine { font-size: 0.72rem; }
 
   .ctas {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: stretch;
   }
-  .ctas .btn { width: 100%; justify-content: center; }
+  .ctas .btn { width: 100%; justify-content: center; min-height: 44px; }
 
   /* Project card on mobile — compact */
   .cardTitle { font-size: 1rem; }
   .cardHeader { padding: 1rem 1rem 0.6rem; }
   .stackBadges { padding: 0.6rem 1rem; }
   .cardActions { padding: 0.6rem 1rem 1rem; flex-direction: column; }
-  .cardActions .btn { width: 100%; justify-content: center; }
+  .cardActions .btn { width: 100%; justify-content: center; min-height: 44px; }
+
+  /* Status panel compact */
+  .statusPanel { padding: 0.75rem 1rem; }
 }
 
-/* Very small */
+/* Very small — 360px and below */
 @media (max-width: 380px) {
-  .name { font-size: 2rem; }
-  .right { display: none; }  /* hide project card on tiny screens */
+  .name { font-size: clamp(1.8rem, 9vw, 2.2rem); }
+  .heroInner { gap: 1.25rem; }
+
+  /* Keep project card but hide the media terminal to save space */
+  .cardMedia { display: none; }
+  .stackBadges { gap: 0.3rem; }
 }

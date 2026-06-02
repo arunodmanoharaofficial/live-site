@@ -34,3 +34,15 @@
   border-top: 1px solid var(--border);
   background: rgba(0,0,0,0.2);
 }
+
+/* Mobile */
+@media (max-width: 640px) {
+  .embedWrap { border-radius: var(--radius-lg); }
+  .iframe { border-radius: var(--radius-lg) var(--radius-lg) 0 0; }
+  .note { padding: 0.6rem 1rem; font-size: 0.68rem; }
+}
+
+@media (max-width: 380px) {
+  .embedWrap { border-radius: var(--radius-md); }
+  .iframe { border-radius: var(--radius-md) var(--radius-md) 0 0; }
+}
