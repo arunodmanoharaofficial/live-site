@@ -26,14 +26,6 @@
   gap: 0.3rem;
 }
 
-/* Row that holds crown + name side by side */
-.nameRow {
-  display: flex;
-  align-items: center;
-  gap: 0.3rem;
-  flex-wrap: nowrap;
-}
-
 .hi {
   font-family: var(--font-mono);
   font-size: 1rem;
@@ -64,24 +56,6 @@
 
 @media (prefers-reduced-motion: reduce) {
   .waveEmoji { animation: none !important; }
-  .crownEmoji { animation: none !important; }
-}
-
-.crownEmoji {
-  display: inline-block;
-  font-size: clamp(2rem, 4.5vw, 3.4rem); /* matches the name font size */
-  line-height: 1;
-  flex-shrink: 0;
-  transform-origin: bottom center;
-  animation: crownFloat 3s ease-in-out infinite;
-  filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.6));
-  -webkit-text-fill-color: initial; /* Fixes emoji disappearing inside gradient text */
-}
-
-@keyframes crownFloat {
-  0%   { transform: translateY(0) rotate(0deg); }
-  50%  { transform: translateY(-8px) rotate(5deg) scale(1.1); filter: drop-shadow(0 0 16px rgba(255, 215, 0, 0.9)); }
-  100% { transform: translateY(0) rotate(0deg); }
 }
 
 .name {
