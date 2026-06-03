@@ -1,5 +1,6 @@
 import { useState, useEffect, lazy, Suspense } from 'react'
 import { AnimatePresence, LazyMotion, domAnimation, m } from 'framer-motion'
+import { useAnimatedTitle } from './hooks/useAnimatedTitle'
 
 // Critical above-fold components — loaded eagerly
 import Navbar        from './components/Navbar'
@@ -24,6 +25,9 @@ const MatrixRain   = lazy(() => import('./components/MatrixRain'))
 export default function App() {
   const [showTerminal, setShowTerminal] = useState(false)
   const [showMatrix,   setShowMatrix]   = useState(false)
+
+  /* ── Animated browser tab title ──────────────────── */
+  useAnimatedTitle()
 
   /* ── Keyboard shortcuts ──────────────────────────── */
   useEffect(() => {
