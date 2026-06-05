@@ -18,6 +18,7 @@
     <!-- ═══ CANONICAL & ALTERNATE ══════════════════════════════════ -->
     <link rel="canonical" href="https://www.arunod.us/" />
     <link rel="alternate" href="https://www.arunod.us/" hreflang="en" />
+    <link rel="dns-prefetch" href="https://api.github.com" />
 
     <!-- ═══ OPEN GRAPH (Facebook, LinkedIn, WhatsApp) ══════════════ -->
     <meta property="og:type" content="profile" />
@@ -180,6 +181,20 @@
         .reveal { opacity: 1 !important; transform: none !important; }
       </style>
     </noscript>
+
+    <!-- Critical inline CSS — eliminates FOUC, speeds up FCP -->
+    <style>
+      body {
+        margin: 0;
+        background: #050f0b;
+        color: #d6ffe8;
+        font-family: 'Inter', system-ui, -apple-system, sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        overflow-x: hidden;
+      }
+      #root { min-height: 100vh; }
+    </style>
   </head>
   <body>
     <div id="root"></div>

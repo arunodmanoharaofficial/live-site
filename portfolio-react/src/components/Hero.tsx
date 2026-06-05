@@ -5,26 +5,37 @@ import { useParallax } from '../hooks/useParallax'
 
 const CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789#@$%&*'
 
-function useDecodeText(finalText, delay = 200) {
-  const [display, setDisplay] = useState('')
+function useDecodeText(finalText: string, delay = 200) {
+  const [display, setDisplay] = useState(finalText) // SSR-friendly default
   const rafRef = useRef<any>(null)
 
   useEffect(() => {
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     if (reduced) { setDisplay(finalText); return }
 
-    const timeout = setTimeout(() => {
-      const duration = 1800
-      let start = null
+    // Start with empty, then animate in
+    setDisplay('')
+    let lastUpdate = 0
+    const THROTTLE = 50 // update at most every 50ms (~20fps) instead of 60fps
 
-      const step = (ts) => {
+    const timeout = setTimeout(() => {
+      const duration = 1000 // reduced from 1800ms
+      let start: number | null = null
+
+      const step = (ts: number) => {
         if (!start) start = ts
         const t = Math.min((ts - start) / duration, 1)
-        const progress = Math.floor(t * finalText.length)
-        const out = Array.from(finalText).map((ch, i) =>
-          i < progress ? ch : (ch === ' ' ? ' ' : CHARS[(Math.random() * CHARS.length) | 0])
-        ).join('')
-        setDisplay(out)
+
+        // Throttle updates to reduce main-thread work
+        if (ts - lastUpdate > THROTTLE || t >= 1) {
+          lastUpdate = ts
+          const progress = Math.floor(t * finalText.length)
+          const out = Array.from(finalText).map((ch, i) =>
+            i < progress ? ch : (ch === ' ' ? ' ' : CHARS[(Math.random() * CHARS.length) | 0])
+          ).join('')
+          setDisplay(out)
+        }
+
         if (t < 1) rafRef.current = requestAnimationFrame(step)
         else setDisplay(finalText)
       }
@@ -61,7 +72,7 @@ function Typewriter({ lines, className }) {
           return next
         })
         setCharIdx(c => c + 1)
-      }, 28)
+      }, 35)
       return () => clearTimeout(t)
     } else {
       const t = setTimeout(() => {
@@ -118,7 +129,7 @@ export default function Hero() {
     const CACHE_KEY = 'gh_repo_cache'
     const CACHE_TTL = 60 * 60 * 1000 // 1 hour in ms
 
-    // Try serving from cache first
+    // Try serving from cache first (synchronous, no network)
     try {
       const cached = localStorage.getItem(CACHE_KEY)
       if (cached) {
@@ -130,21 +141,32 @@ export default function Hero() {
       }
     } catch { /* ignore corrupt cache */ }
 
-    // Fetch fresh data and cache it
-    fetch('https://api.github.com/users/arunodmanoharaofficial/repos?sort=updated&per_page=1')
-      .then(r => r.json())
-      .then(([repo]) => {
-        if (!repo) return
-        const diff = Math.floor((Date.now() - new Date(repo.pushed_at).getTime()) / 1000)
-        const units: [string, number][] = [['yr',31536000],['mo',2592000],['d',86400],['h',3600],['m',60],['s',1]]
-        let ago = 'just now'
-        for (const [l,s] of units) { const v = Math.floor(diff/s); if (v>=1){ago=`${v}${l} ago`;break} }
-        const result = { name: repo.full_name, href: repo.html_url, updated: `Updated ${ago}` }
-        setGhRepo(result)
-        try { localStorage.setItem(CACHE_KEY, JSON.stringify({ ts: Date.now(), data: result })) }
-        catch { /* storage full — ignore */ }
-      })
-      .catch(() => setGhRepo({ name: 'arunodmanoharaofficial', href: 'https://github.com/arunodmanoharaofficial', updated: '' }))
+    // Defer network fetch until browser is idle — don't block LCP
+    const doFetch = () => {
+      fetch('https://api.github.com/users/arunodmanoharaofficial/repos?sort=updated&per_page=1')
+        .then(r => r.json())
+        .then(([repo]) => {
+          if (!repo) return
+          const diff = Math.floor((Date.now() - new Date(repo.pushed_at).getTime()) / 1000)
+          const units: [string, number][] = [['yr',31536000],['mo',2592000],['d',86400],['h',3600],['m',60],['s',1]]
+          let ago = 'just now'
+          for (const [l,s] of units) { const v = Math.floor(diff/s); if (v>=1){ago=`${v}${l} ago`;break} }
+          const result = { name: repo.full_name, href: repo.html_url, updated: `Updated ${ago}` }
+          setGhRepo(result)
+          try { localStorage.setItem(CACHE_KEY, JSON.stringify({ ts: Date.now(), data: result })) }
+          catch { /* storage full — ignore */ }
+        })
+        .catch(() => setGhRepo({ name: 'arunodmanoharaofficial', href: 'https://github.com/arunodmanoharaofficial', updated: '' }))
+    }
+
+    // Use requestIdleCallback if available, else defer 2s
+    if ('requestIdleCallback' in window) {
+      const id = requestIdleCallback(doFetch, { timeout: 3000 })
+      return () => cancelIdleCallback(id)
+    } else {
+      const t = setTimeout(doFetch, 2000)
+      return () => clearTimeout(t)
+    }
   }, [])
 
   return (
@@ -225,7 +247,7 @@ export default function Hero() {
             <div className={styles.cardGlow} />
             <div className={styles.cardHeader}>
               <span className="chip active">Active Deployment</span>
-              <h3 className={styles.cardTitle}>Secure VPN Orchestrator</h3>
+              <h2 className={styles.cardTitle}>Secure VPN Orchestrator</h2>
               <p className={styles.cardTagline}>Automated VPN provisioning with Docker + WireGuard</p>
             </div>
 

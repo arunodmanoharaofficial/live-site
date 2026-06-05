@@ -57,8 +57,8 @@ export function useAnimatedTitle() {
       }
     }
 
-    // Start after a short initial delay
-    timer = setTimeout(tick, 1000)
+    // Start after LCP window passes (~4s) to avoid competing with initial render
+    timer = setTimeout(tick, 4000)
 
     // Pause animation when tab is hidden
     const onVisibility = () => {

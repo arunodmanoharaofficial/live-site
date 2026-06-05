@@ -36,8 +36,9 @@ export default function About() {
                   src="/profile.jpg"
                   alt="Arunod Manohara"
                   className={styles.avatar}
-                  loading="lazy"
+                  loading="eager"
                   decoding="async"
+                  fetchPriority="high"
                   width={280}
                   height={280}
                 />
