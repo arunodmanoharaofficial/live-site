@@ -27,8 +27,9 @@ export default function Contact() {
             <div className={styles.left}>
               <span className="section-label">05. Contact</span>
               <h2 className="section-heading">
-                <span className="animatedEmoji" aria-label="handshake">🤝</span> Initiate Secure <span className="hl">Handshake</span>
+                Get in <span className="hl">Touch</span>
               </h2>
+              <p className="section-subtitle" aria-hidden="true">🤝 Initiate Secure Handshake</p>
               <p className={styles.desc}>
                 Architecting security-first products or auditing infrastructure hardening?
                 Transmit a request and obtain secure confirmation within 24 hours.

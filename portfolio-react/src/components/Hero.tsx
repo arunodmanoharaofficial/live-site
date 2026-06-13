@@ -187,11 +187,11 @@ export default function Hero() {
           </m.div>
 
           {/* Name */}
+          <m.p variants={fadeUp} className={styles.hi} aria-hidden="true">
+            Hello, I&apos;m
+            <span className={styles.waveEmoji} aria-label="wave">👋</span>
+          </m.p>
           <m.h1 variants={fadeUp} className={styles.title}>
-            <span className={styles.hi}>
-              Hello, I&apos;m
-              <span className={styles.waveEmoji} aria-label="wave">👋</span>
-            </span>
             <m.span
               className={styles.name}
               whileHover={{
@@ -202,6 +202,7 @@ export default function Hero() {
             >
               {name || 'Arunod Manohara'}
             </m.span>
+            <span className={styles.titleRole}>Web Developer &amp; Cybersecurity Student</span>
           </m.h1>
 
           {/* Hashtag & Founder */}

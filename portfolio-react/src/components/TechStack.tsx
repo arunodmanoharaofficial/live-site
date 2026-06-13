@@ -92,7 +92,8 @@ export default function TechStack() {
             variants={{ hidden:{ opacity:0, y:20 }, show:{ opacity:1, y:0 } }}
           >
             <span className="section-label">02. Stack</span>
-            <h2 className="section-heading">Technical <span className="hl">Architecture</span> <span className={styles.headEmoji}>⚙️</span></h2>
+            <h2 className="section-heading">Technical <span className="hl">Skills &amp; Tools</span></h2>
+            <p className="section-subtitle" aria-hidden="true">Technical Architecture ⚙️</p>
             <p className="muted">Core tools deployed in production workflows.</p>
           </m.div>
 

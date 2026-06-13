@@ -380,7 +380,7 @@ body[data-bg="aurora"] .bg-aurora {
   letter-spacing: -0.5px;
 }
 
-.title .hi {
+.hi {
   display: flex;
   align-items: center;
   gap: 12px;
@@ -393,13 +393,23 @@ body[data-bg="aurora"] .bg-aurora {
   margin-bottom: 12px;
 }
 
-.title .hi::before {
+.hi::before {
   content: '';
   display: inline-block;
   width: 32px;
   height: 2px;
   background: var(--accent-cyan);
   box-shadow: 0 0 8px var(--accent-cyan);
+}
+
+.title-role {
+  display: block;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 600;
+  font-size: clamp(14px, 1.6vw, 18px);
+  color: var(--text-muted);
+  letter-spacing: 0.5px;
+  margin-top: 8px;
 }
 
 .gradient-text {
@@ -763,6 +773,18 @@ body[data-bg="aurora"] .bg-aurora {
 
 .section-heading.heading-drawn::after {
   width: 100%;
+}
+
+.section-subtitle {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  color: var(--accent-cyan);
+  opacity: 0.55;
+  margin-top: -16px;
+  margin-bottom: 20px;
 }
 
 .about {

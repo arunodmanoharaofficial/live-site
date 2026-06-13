@@ -13,8 +13,9 @@ export default function Playlist() {
         >
           <span className="section-label">03. Playlist</span>
           <h2 className="section-heading">
-            <span className="animatedEmoji" aria-label="headphones">🎧</span> Audio <span className="hl">Frequency</span>
+            <span className="animatedEmoji" aria-label="headphones">🎧</span> My <span className="hl">Playlist</span>
           </h2>
+          <p className="section-subtitle" aria-hidden="true">Audio Frequency</p>
           <p className="muted" style={{ marginBottom: '2rem' }}>
             Ambient operational frequencies — Sri Lankan Sounds.
           </p>

@@ -96,6 +96,17 @@
 
 
 
+.titleRole {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: clamp(0.78rem, 1.6vw, 1rem);
+  font-weight: 600;
+  color: var(--text-muted);
+  letter-spacing: 0.04em;
+  margin-top: 0.35rem;
+  -webkit-text-fill-color: initial;
+}
+
 .hashtagBox {
   display: flex;
   flex-direction: column;

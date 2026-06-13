@@ -61,8 +61,11 @@ export default function About() {
           <m.div variants={stagger} className={styles.content}>
             <m.span variants={fadeUp} className="section-label">01. About</m.span>
             <m.h2 variants={fadeUp} className="section-heading">
-              Operational <span className="hl">Dossier</span> <span className={styles.headingEmoji}>🗂️</span>
+              About <span className="hl">Arunod Manohara</span>
             </m.h2>
+            <m.p variants={fadeUp} className="section-subtitle" aria-hidden="true">
+              Operational Dossier 🗂️
+            </m.p>
 
             <m.p variants={fadeUp} className={styles.para}>
               Greetings — I&apos;m <strong>Arunod Manohara</strong>, a dedicated{' '}
