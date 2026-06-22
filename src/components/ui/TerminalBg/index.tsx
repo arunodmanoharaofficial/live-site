@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react'
 import styles from './TerminalBg.module.css'
-import { useParallax } from '../hooks/useParallax'
+import { useParallax } from '../../../hooks/useParallax'
 
 export default function TerminalBg() {
   const canvasRef   = useRef<any>(null)

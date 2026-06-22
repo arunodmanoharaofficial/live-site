@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { m } from 'framer-motion'
 import styles from './Hero.module.css'
-import { useParallax } from '../hooks/useParallax'
+import { useParallax } from '../../../hooks/useParallax'
 
 const CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789#@$%&*'
 

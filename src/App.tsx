@@ -3,24 +3,24 @@ import { AnimatePresence, LazyMotion, domAnimation, m } from 'framer-motion'
 import { useAnimatedTitle } from './hooks/useAnimatedTitle'
 
 // Critical above-fold components — loaded eagerly
-import Navbar        from './components/Navbar'
-import Hero          from './components/Hero'
-import TerminalBg    from './components/TerminalBg'
-import CursorGlow    from './components/CursorGlow'
-import ScrollProgress from './components/ScrollProgress'
-import FloatingEmojis from './components/FloatingEmojis'
+import Navbar        from './components/layout/Navbar'
+import Hero          from './components/sections/Hero'
+import TerminalBg    from './components/ui/TerminalBg'
+import CursorGlow    from './components/ui/CursorGlow'
+import ScrollProgress from './components/ui/ScrollProgress'
+import FloatingEmojis from './components/ui/FloatingEmojis'
 
 // Below-fold sections — lazy loaded for faster initial paint
-const About        = lazy(() => import('./components/About'))
-const TechStack    = lazy(() => import('./components/TechStack'))
-const Playlist     = lazy(() => import('./components/Playlist'))
-const Social       = lazy(() => import('./components/Social'))
-const Contact      = lazy(() => import('./components/Contact'))
-const Footer       = lazy(() => import('./components/Footer'))
+const About        = lazy(() => import('./components/sections/About'))
+const TechStack    = lazy(() => import('./components/sections/TechStack'))
+const Playlist     = lazy(() => import('./components/sections/Playlist'))
+const Social       = lazy(() => import('./components/sections/Social'))
+const Contact      = lazy(() => import('./components/sections/Contact'))
+const Footer       = lazy(() => import('./components/layout/Footer'))
 
 // Overlay / feature components — only loaded when triggered
-const Terminal     = lazy(() => import('./components/Terminal'))
-const MatrixRain   = lazy(() => import('./components/MatrixRain'))
+const Terminal     = lazy(() => import('./components/ui/Terminal'))
+const MatrixRain   = lazy(() => import('./components/ui/MatrixRain'))
 
 export default function App() {
   const [showTerminal, setShowTerminal] = useState(false)

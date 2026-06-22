@@ -1,0 +1,12 @@
+{
+  "name": "live-site",
+  "version": "1.0.0",
+  "description": "Arunod Manohara - Web Developer & Cybersecurity Student Portfolio",
+  "scripts": {
+    "postinstall": "npm install --include=dev --prefix portfolio-react",
+    "dev": "npm run dev --prefix portfolio-react",
+    "build": "npm run build --prefix portfolio-react",
+    "preview": "npm run preview --prefix portfolio-react",
+    "lint": "npm run lint --prefix portfolio-react"
+  }
+}
