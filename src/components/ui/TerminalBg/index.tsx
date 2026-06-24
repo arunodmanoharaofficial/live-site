@@ -1,3 +1,4 @@
+"use client";
 import { useEffect, useRef } from 'react'
 import styles from './TerminalBg.module.css'
 import { useParallax } from '../../../hooks/useParallax'

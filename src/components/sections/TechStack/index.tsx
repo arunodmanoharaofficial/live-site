@@ -1,3 +1,4 @@
+"use client";
 import { m } from 'framer-motion'
 import styles from './TechStack.module.css'
 

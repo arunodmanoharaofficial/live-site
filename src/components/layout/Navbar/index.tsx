@@ -1,4 +1,6 @@
+"use client";
 import { useState, useEffect } from 'react'
+import Image from 'next/image'
 import { m, AnimatePresence } from 'framer-motion'
 import styles from './Navbar.module.css'
 
@@ -40,7 +42,7 @@ export default function Navbar() {
         {/* Brand */}
         <a href="#home" className={styles.brand}>
           <div className={styles.brandAvatar}>
-            <img src="/profile.jpg" alt="Arunod Manohara" width="34" height="34" />
+            <Image src="/profile.jpg" alt="Arunod Manohara" width={34} height={34} />
           </div>
           <span className={styles.brandText}>
             <span className={styles.brandName}>Arunod</span>

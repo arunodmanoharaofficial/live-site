@@ -1,3 +1,4 @@
+"use client";
 import { useState, useEffect, useRef, useCallback } from 'react'
 import { m } from 'framer-motion'
 import styles from './Terminal.module.css'

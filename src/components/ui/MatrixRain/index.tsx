@@ -1,3 +1,4 @@
+"use client";
 import { useEffect, useRef, useCallback } from 'react'
 import { m, AnimatePresence } from 'framer-motion'
 import styles from './MatrixRain.module.css'

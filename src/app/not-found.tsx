@@ -1,7 +1,8 @@
+"use client";
 import { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useRouter, usePathname } from 'next/navigation'
 import { m, AnimatePresence } from 'framer-motion'
-import styles from './NotFound.module.css'
+import styles from './not-found.module.css'
 
 /* ── Fake traceroute hops ─────────────────────────── */
 const TRACE_HOPS = [
@@ -16,7 +17,8 @@ const TRACE_HOPS = [
 const REDIRECT_SECS = 8
 
 export default function NotFound() {
-  const navigate  = useNavigate()
+  const router    = useRouter()
+  const pathname  = usePathname()
   const [hops,    setHops]    = useState<any[]>([])      // visible traceroute lines
   const [counter, setCounter] = useState(REDIRECT_SECS)
   const [phase,   setPhase]   = useState('boot')  // boot | trace | countdown | redirect
@@ -66,10 +68,10 @@ export default function NotFound() {
   /* ── Auto-navigate home ──────────────────────────── */
   useEffect(() => {
     if (phase === 'redirect') {
-      const t = setTimeout(() => navigate('/'), 500)
+      const t = setTimeout(() => router.push('/'), 500)
       return () => clearTimeout(t)
     }
-  }, [phase, navigate])
+  }, [phase, router])
 
   return (
     <div className={styles.page}>
@@ -126,7 +128,7 @@ export default function NotFound() {
             </p>
             <p className={styles.detailLine}>
               <span className={styles.key}>Address   </span>
-              <span className={styles.val}>{window.location.pathname}</span>
+              <span className={styles.val}>{pathname}</span>
             </p>
             <p className={styles.detailLine}>
               <span className={styles.key}>Status    </span>
@@ -145,7 +147,7 @@ export default function NotFound() {
                 animate={{ opacity: 1 }}
               >
                 <p className={styles.traceTitle}>
-                  traceroute to {window.location.hostname}, 6 hops max
+                  traceroute to {typeof window !== 'undefined' ? window.location.hostname : 'localhost'}, 6 hops max
                 </p>
                 {hops.map((hop, i) => (
                   <m.p
@@ -212,7 +214,7 @@ export default function NotFound() {
 
           {/* Manual home button */}
           <div className={styles.actions}>
-            <button className={styles.homeBtn} onClick={() => navigate('/')}>
+            <button className={styles.homeBtn} onClick={() => router.push('/')}>
               <span>&lt;/&gt;</span> Return to arunod.us
             </button>
           </div>

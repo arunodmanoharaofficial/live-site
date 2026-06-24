@@ -1,3 +1,4 @@
+"use client";
 import { useState, useEffect, useRef } from 'react'
 import { m } from 'framer-motion'
 import styles from './Hero.module.css'

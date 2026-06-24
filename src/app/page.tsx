@@ -1,28 +1,31 @@
-import { useState, useEffect, lazy, Suspense } from 'react'
+"use client";
+
+import { useState, useEffect, Suspense } from 'react'
+import dynamic from 'next/dynamic'
 import { AnimatePresence, LazyMotion, domAnimation, m } from 'framer-motion'
-import { useAnimatedTitle } from './hooks/useAnimatedTitle'
+import { useAnimatedTitle } from '../hooks/useAnimatedTitle'
 
 // Critical above-fold components — loaded eagerly
-import Navbar        from './components/layout/Navbar'
-import Hero          from './components/sections/Hero'
-import TerminalBg    from './components/ui/TerminalBg'
-import CursorGlow    from './components/ui/CursorGlow'
-import ScrollProgress from './components/ui/ScrollProgress'
-import FloatingEmojis from './components/ui/FloatingEmojis'
+import Navbar        from '../components/layout/Navbar'
+import Hero          from '../components/sections/Hero'
+import TerminalBg    from '../components/ui/TerminalBg'
+import CursorGlow    from '../components/ui/CursorGlow'
+import ScrollProgress from '../components/ui/ScrollProgress'
+import FloatingEmojis from '../components/ui/FloatingEmojis'
 
 // Below-fold sections — lazy loaded for faster initial paint
-const About        = lazy(() => import('./components/sections/About'))
-const TechStack    = lazy(() => import('./components/sections/TechStack'))
-const Playlist     = lazy(() => import('./components/sections/Playlist'))
-const Social       = lazy(() => import('./components/sections/Social'))
-const Contact      = lazy(() => import('./components/sections/Contact'))
-const Footer       = lazy(() => import('./components/layout/Footer'))
+const About        = dynamic(() => import('../components/sections/About'), { ssr: true })
+const TechStack    = dynamic(() => import('../components/sections/TechStack'), { ssr: true })
+const Playlist     = dynamic(() => import('../components/sections/Playlist'), { ssr: true })
+const Social       = dynamic(() => import('../components/sections/Social'), { ssr: true })
+const Contact      = dynamic(() => import('../components/sections/Contact'), { ssr: true })
+const Footer       = dynamic(() => import('../components/layout/Footer'), { ssr: true })
 
 // Overlay / feature components — only loaded when triggered
-const Terminal     = lazy(() => import('./components/ui/Terminal'))
-const MatrixRain   = lazy(() => import('./components/ui/MatrixRain'))
+const Terminal     = dynamic(() => import('../components/ui/Terminal'), { ssr: false })
+const MatrixRain   = dynamic(() => import('../components/ui/MatrixRain'), { ssr: false })
 
-export default function App() {
+export default function Home() {
   const [showTerminal, setShowTerminal] = useState(false)
   const [showMatrix,   setShowMatrix]   = useState(false)
 
@@ -31,7 +34,7 @@ export default function App() {
 
   /* ── Keyboard shortcuts ──────────────────────────── */
   useEffect(() => {
-    const onKey = (e) => {
+    const onKey = (e: KeyboardEvent) => {
       // Ctrl+` → toggle terminal
       if (e.ctrlKey && e.key === '`') {
         e.preventDefault()
