@@ -1,5 +1,22 @@
 import type { Metadata, Viewport } from 'next';
+import { JetBrains_Mono, Inter } from 'next/font/google';
 import './globals.css';
+
+/* ── Self-hosted fonts via next/font (eliminates CLS + external requests) ── */
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ['latin'],
+  weight: ['400', '600', '700'],
+  style: ['normal', 'italic'],
+  variable: '--nf-mono',
+  display: 'swap',
+});
+
+const inter = Inter({
+  subsets: ['latin'],
+  weight: ['400', '500', '600'],
+  variable: '--nf-body',
+  display: 'swap',
+});
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -71,7 +88,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" prefix="og: https://ogp.me/ns#">
+    <html lang="en" prefix="og: https://ogp.me/ns#" className={`${jetbrainsMono.variable} ${inter.variable}`}>
       <head>
         <meta name="revisit-after" content="7 days" />
         <meta name="language" content="English" />
@@ -170,11 +187,11 @@ export default function RootLayout({
           }}
         />
 
-        {/* Fonts */}
+        {/* ADLaM Display — specialty font loaded externally (JetBrains Mono + Inter are self-hosted via next/font) */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
-          href="https://fonts.googleapis.com/css2?family=ADLaM+Display&family=JetBrains+Mono:ital,wght@0,400;0,600;0,700;1,400&family=Outfit:wght@400;700;800;900&family=Inter:wght@400;500;600&display=swap"
+          href="https://fonts.googleapis.com/css2?family=ADLaM+Display&display=swap"
           rel="stylesheet"
         />
 

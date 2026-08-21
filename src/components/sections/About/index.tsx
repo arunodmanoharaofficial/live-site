@@ -34,15 +34,13 @@ export default function About() {
           <m.div variants={fadeUp} className={styles.avatarWrap}>
             <div className={styles.avatarRing}>
               <div className={styles.avatarRing2}>
-                <img
+                <Image
                   src="/profile.jpg"
                   alt="Arunod Manohara"
                   className={styles.avatar}
-                  loading="eager"
-                  decoding="async"
-                  fetchPriority="high"
                   width={280}
                   height={280}
+                  quality={85}
                 />
               </div>
             </div>
