@@ -1,8 +1,11 @@
 "use client";
 import { useState, useEffect, useRef } from 'react'
 import { m } from 'framer-motion'
+import dynamic from 'next/dynamic'
 import styles from './Hero.module.css'
 import { useParallax } from '../../../hooks/useParallax'
+
+const Globe = dynamic(() => import('../../ui/Globe'), { ssr: false })
 
 const CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789#@$%&*'
 
@@ -244,42 +247,8 @@ export default function Hero() {
           animate={{ opacity:1, x:0 }}
           transition={{ duration:0.8, ease:[0.16,1,0.3,1], delay:0.4 }}
         >
-          {/* Featured Project Card */}
-          <div className={`${styles.projectCard} glass-card`}>
-            <div className={styles.cardGlow} />
-            <div className={styles.cardHeader}>
-              <span className="chip active">Active Deployment</span>
-              <h2 className={styles.cardTitle}>Secure VPN Orchestrator</h2>
-              <p className={styles.cardTagline}>Automated VPN provisioning with Docker + WireGuard</p>
-            </div>
-
-            <div className={styles.cardMedia}>
-              <div className={styles.mediaTerminal}>
-                <div className={styles.mediaTermHeader}>
-                  <span />
-                  <span className={styles.mediaTermLabel}>system.log</span>
-                </div>
-                <div className={styles.mediaTermBody}>
-                  <p><span className={styles.green}>✓</span> WireGuard tunnel established</p>
-                  <p><span className={styles.green}>✓</span> Docker containers healthy</p>
-                  <p><span className={styles.cyan}>●</span> Monitoring: ACTIVE</p>
-                  <p><span className={styles.green}>✓</span> Encryption: AES-256</p>
-                  <p className={styles.typing}><span className={styles.green}>$</span> awaiting input<span className={styles.cursor}>▋</span></p>
-                </div>
-              </div>
-            </div>
-
-            <div className={styles.stackBadges}>
-              {['Python', 'Docker', 'WireGuard', 'Linux'].map(t => (
-                <span key={t} className="terminal-tag">{t}</span>
-              ))}
-            </div>
-
-            <div className={styles.cardActions}>
-              <a href="https://arunod.us/" target="_blank" rel="noopener" className="btn btn-primary">Launch Live</a>
-              <a href="https://github.com/arunodmanoharaofficial" target="_blank" rel="noopener" className="btn btn-ghost">Source Code</a>
-            </div>
-          </div>
+          {/* Interactive 3D Globe */}
+          <Globe />
 
           {/* Status Panel */}
           <div className={`${styles.statusPanel} glass-card`}>
